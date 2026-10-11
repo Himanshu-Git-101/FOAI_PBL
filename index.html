@@ -1,0 +1,1554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI-Based Student Timetable Generator | Foundations of AI (Review 1)</title>
+  <meta name="description" content="A refined 12-screen interactive academic pitch for Foundations of Artificial Intelligence Project Based Learning: AI-Based Student Timetable Generator (Review 1).">
+
+  <!-- Google Fonts: Plus Jakarta Sans & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ==========================================================================
+       MINIMAL STICKY NAVIGATION
+       ========================================================================== -->
+  <header class="sticky-navbar" id="top-navbar">
+    <div class="nav-wrap">
+      <a href="#hero" class="nav-brand" aria-label="AI Timetable Pitch Home">
+        <div class="brand-icon-box">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+            <line x1="16" y1="2" x2="16" y2="6"></line>
+            <line x1="8" y1="2" x2="8" y2="6"></line>
+            <line x1="3" y1="10" x2="21" y2="10"></line>
+          </svg>
+        </div>
+        <span>AI TIMETABLE</span>
+      </a>
+
+      <nav aria-label="Pitch Navigation">
+        <ul class="nav-items" id="nav-items-list">
+          <li><a href="#problem" class="nav-item-link">PROBLEM</a></li>
+          <li><a href="#research" class="nav-item-link">RESEARCH</a></li>
+          <li><a href="#gap" class="nav-item-link">GAP</a></li>
+          <li><a href="#approach" class="nav-item-link">APPROACH</a></li>
+          <li><a href="#course" class="nav-item-link">AI CONCEPTS</a></li>
+          <li><a href="#roadmap" class="nav-item-link">ROADMAP</a></li>
+          <li><a href="#live-generator" class="nav-item-link highlight-nav">GENERATOR</a></li>
+        </ul>
+      </nav>
+
+      <div style="display: flex; align-items: center; gap: 10px;">
+        <a href="generator.html" class="nav-generator-pill">⚡ STUDIO</a>
+        <span class="review-badge-pill">REVIEW 01</span>
+      </div>
+    </div>
+    <!-- Thin Scroll Progress Line -->
+    <div class="scroll-progress-line" id="scroll-progress" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+  </header>
+
+  <!-- ==========================================================================
+       SCREEN 01 — HERO (VISUAL PIPELINE OPENING)
+       ========================================================================== -->
+  <section class="pitch-screen hero-screen" id="hero">
+    <div class="container">
+      <div class="hero-meta-strip">
+        <span class="meta-chip">WOXSEN UNIVERSITY</span>
+        <span class="meta-chip">FOUNDATIONS OF ARTIFICIAL INTELLIGENCE (PBL)</span>
+        <span class="meta-chip chip-orange">REVIEW 01</span>
+      </div>
+
+      <h1 class="hero-title">
+        <span class="blue-part">AI-BASED</span><br>
+        <span class="dark-part">STUDENT TIMETABLE</span><br>
+        <span class="orange-part">GENERATOR</span>
+      </h1>
+
+      <p class="hero-sub">
+        “Turning timetable scheduling into an intelligent constraint and optimization problem.”
+      </p>
+
+      <div class="hero-actions-row">
+        <a href="generator.html" class="btn-hero-primary">
+          ⚡ Launch Timetable Generator Studio →
+        </a>
+        <a href="#live-generator" class="btn-hero-secondary">
+          View Interactive Generator ↓
+        </a>
+      </div>
+
+      <!-- Visual Timetable Transformation Pipeline -->
+      <div class="hero-transform-card">
+        <div class="stage-badge-label">
+          <span class="glow-dot"></span> PROPOSED AI PIPELINE • WOXSEN BENCHMARK
+        </div>
+
+        <div class="pipeline-flex-layout">
+          <!-- Left: Messy Schedule -->
+          <div class="mini-schedule-box messy">
+            <div class="box-header-title">
+              <span>MESSY SCHEDULE</span>
+              <span class="box-state-tag">CONFLICTS</span>
+            </div>
+            <div class="grid-slots-3x2">
+              <div class="slot-tile conflict-tile">
+                <strong>FOAIO / COA</strong>
+                <span>⚠ Room F307 Clash</span>
+              </div>
+              <div class="slot-tile clean-tile">
+                <strong>DAA Lab (Dr. Pasha)</strong>
+                <span>Room C004 Ok</span>
+              </div>
+              <div class="slot-tile conflict-tile">
+                <strong>COA (Dr. Malli)</strong>
+                <span>⚠ Teacher Double</span>
+              </div>
+              <div class="slot-tile clean-tile">
+                <strong>DBMS (Prof. Sahithi)</strong>
+                <span>Room F105 Ok</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Connector 1 -->
+          <div class="pipe-flow-bridge">
+            <div class="pipe-track">
+              <div class="pipe-pulse-particle"></div>
+            </div>
+            <span>CONFLICT</span>
+          </div>
+
+          <!-- Center: AI Intelligence Node -->
+          <div class="center-ai-core">
+            <div class="ai-core-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                <circle cx="12" cy="12" r="3"></circle>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path>
+              </svg>
+            </div>
+            <h3 class="ai-core-title">AI ENGINE</h3>
+            <div class="ai-core-sub">Multi-Paradigm Solver</div>
+            <div class="ai-core-badges">
+              <span>CSP</span>
+              <span>SEARCH</span>
+              <span class="active-node">OPTIMIZATION</span>
+              <span>PREFERENCES</span>
+            </div>
+          </div>
+
+          <!-- Connector 2 -->
+          <div class="pipe-flow-bridge">
+            <div class="pipe-track">
+              <div class="pipe-pulse-particle"></div>
+            </div>
+            <span>OPTIMIZE</span>
+          </div>
+
+          <!-- Right: Clean Optimized Schedule -->
+          <div class="mini-schedule-box clean">
+            <div class="box-header-title">
+              <span>OPTIMIZED SCHEDULE</span>
+              <span class="box-state-tag">CONFLICT-FREE</span>
+            </div>
+            <div class="grid-slots-3x2">
+              <div class="slot-tile clean-tile">
+                <strong>FOAIO (Dr. Muralidhar)</strong>
+                <span>✓ Room F307</span>
+              </div>
+              <div class="slot-tile clean-tile">
+                <strong>COA (Dr. Malli)</strong>
+                <span>✓ Room F102</span>
+              </div>
+              <div class="slot-tile clean-tile">
+                <strong>DAA (Dr. Pasha)</strong>
+                <span>✓ Room F301</span>
+              </div>
+              <div class="slot-tile clean-tile">
+                <strong>DMCS (Prof. Gururaj)</strong>
+                <span>✓ Room C008</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 02 — THE PROBLEM (5 REPRESENTATIVE HIGHLIGHTS)
+       ========================================================================== -->
+  <section class="pitch-screen tinted" id="problem">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag"><span class="dot"></span> 02 / THE PROBLEM</div>
+        <h2 class="pitch-title">“A Timetable Is Easy to Draw.<br>A Good Timetable Is Hard to Build.”</h2>
+        <p class="pitch-subtitle">
+          Manual scheduling becomes exponentially difficult as constraints, classrooms, and stakeholder preferences multiply.
+        </p>
+      </div>
+
+      <div class="problem-grid-layout">
+        <!-- 5 Conflict Selectors -->
+        <div class="conflict-picker-col">
+          <div class="mono" style="font-size: 0.72rem; color: var(--text-muted); font-weight: 700; margin-bottom: 0.85rem; text-transform: uppercase;">
+            Inspect Scheduling Conflicts:
+          </div>
+          <button class="conflict-nav-btn active" data-clash="faculty">
+            <span>Faculty Conflict</span>
+            <span class="pill">Overlap</span>
+          </button>
+          <button class="conflict-nav-btn" data-clash="room">
+            <span>Room Conflict</span>
+            <span class="pill">Double-Book</span>
+          </button>
+          <button class="conflict-nav-btn" data-clash="student">
+            <span>Student Conflict</span>
+            <span class="pill">Batch Clash</span>
+          </button>
+          <button class="conflict-nav-btn" data-clash="availability">
+            <span>Availability</span>
+            <span class="pill">Time-Off</span>
+          </button>
+          <button class="conflict-nav-btn" data-clash="workload">
+            <span>Workload</span>
+            <span class="pill">Imbalance</span>
+          </button>
+        </div>
+
+        <!-- Timetable Grid Visualizer -->
+        <div class="problem-matrix-card">
+          <div class="problem-matrix-header">
+            <div>
+              <span class="matrix-title-text">Woxsen University • Timetable Matrix</span>
+              <span class="mono" style="font-size: 0.72rem; color: var(--text-muted); display: block; margin-top: 2px;">Cohort: AIML Rhinos (with Tigers, Leopards, Panthers)</span>
+            </div>
+            <span class="conflict-indicator-callout" id="clash-indicator">Active: Faculty Conflict</span>
+          </div>
+
+          <div class="table-responsive-wrapper">
+            <table class="schedule-matrix-table">
+              <thead>
+                <tr>
+                  <th>TIME</th>
+                  <th>MON</th>
+                  <th>TUE</th>
+                  <th>WED</th>
+                  <th>THU</th>
+                  <th>FRI</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="time-col">09:00 AM</td>
+                  <td id="td-mon-1">
+                    <div class="td-inner">
+                      <span class="td-course">Self Study / Tut</span>
+                      <span class="td-meta">Room F102 • Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-tue-1">
+                    <div class="td-inner">
+                      <span class="td-course">DAA Lab (Dr. Pasha)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-wed-1" class="matrix-clash">
+                    <div class="td-inner">
+                      <span class="td-course">DAA (Dr. Pasha)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-thu-1">
+                    <div class="td-inner">
+                      <span class="td-course">DAA (Dr. Pasha)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-fri-1">
+                    <div class="td-inner">
+                      <span class="td-course">DBMS (Prof. Sahithi)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="time-col">11:00 AM</td>
+                  <td id="td-mon-2">
+                    <div class="td-inner">
+                      <span class="td-course">Academic Prep</span>
+                      <span class="td-meta">Library • All</span>
+                    </div>
+                  </td>
+                  <td id="td-tue-2" class="matrix-clash">
+                    <div class="td-inner">
+                      <span class="td-course">COA (Dr. Malli Rao)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-wed-2" class="matrix-clash">
+                    <div class="td-inner">
+                      <span class="td-course">ACLT (Prof. Ashok)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-thu-2">
+                    <div class="td-inner">
+                      <span class="td-course">DMCS (Prof. Gururaj)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-fri-2">
+                    <div class="td-inner">
+                      <span class="td-course">DAA (Dr. Pasha)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="time-col">02:00 PM</td>
+                  <td id="td-mon-3">
+                    <div class="td-inner">
+                      <span class="td-course">Project Work</span>
+                      <span class="td-meta">Lab C001 • All</span>
+                    </div>
+                  </td>
+                  <td id="td-tue-3">
+                    <div class="td-inner">
+                      <span class="td-course">DBMS Lab (Prof. Sahithi)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-wed-3" class="matrix-clash">
+                    <div class="td-inner">
+                      <span class="td-course">DMCS (Prof. Gururaj)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-thu-3" class="matrix-clash">
+                    <div class="td-inner">
+                      <span class="td-course">COA (Dr. Malli Rao)</span>
+                      <span class="td-meta">Room C005 • AIML Tigers</span>
+                    </div>
+                  </td>
+                  <td id="td-fri-3">
+                    <div class="td-inner">
+                      <span class="td-course">COA Lab (Dr. Malli Rao)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr>
+                  <td class="time-col">04:00 PM</td>
+                  <td id="td-mon-4">
+                    <div class="td-inner">
+                      <span class="td-course">Open Slot</span>
+                      <span class="td-meta">-x-</span>
+                    </div>
+                  </td>
+                  <td id="td-tue-4">
+                    <div class="td-inner">
+                      <span class="td-course">Free Period</span>
+                      <span class="td-meta">-x-</span>
+                    </div>
+                  </td>
+                  <td id="td-wed-4">
+                    <div class="td-inner">
+                      <span class="td-course">FOAIO (Dr. Muralidhar)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-thu-4">
+                    <div class="td-inner">
+                      <span class="td-course">COA (Dr. Malli Rao)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                  <td id="td-fri-4">
+                    <div class="td-inner">
+                      <span class="td-course">FOAIO (Dr. Muralidhar)</span>
+                      <span class="td-meta">Room F307 • AIML Rhinos</span>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="problem-callout-text" id="clash-explanation">
+            <strong>Faculty Conflict:</strong> Dr. Malli Rajeswara Rao is assigned to teach Computer Organization &amp; Architecture (COA) for both <em>AIML Rhinos (Room F307)</em> and <em>AIML Tigers (Room C005)</em> at overlapping slots. A professor cannot instruct two distinct sections simultaneously.
+          </div>
+        </div>
+      </div>
+
+      <!-- Problem Summary Equation -->
+      <div class="problem-equation-strip">
+        <div class="equation-large">
+          ONE SCHEDULE <span>+</span> MANY CONSTRAINTS <span>+</span> MANY POSSIBLE COMBINATIONS
+        </div>
+        <p>
+          “Manual scheduling becomes difficult as constraints and stakeholders increase.”
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 03 — WHY AI? (PROGRESSION + 4 CONCISE CONCEPTS)
+       ========================================================================== -->
+  <section class="pitch-screen" id="why-ai">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> 03 / WHY AI?</div>
+        <h2 class="pitch-title">Why Does This Need AI?</h2>
+        <p class="pitch-subtitle">
+          Classical trial-and-error fails against high-dimensional combinatorial constraints.
+        </p>
+      </div>
+
+      <div class="why-ai-grid">
+        <!-- Visual Progression Funnel -->
+        <div class="funnel-vertical-box">
+          <div class="funnel-step">
+            <strong>01. INPUT DATA (WOXSEN)</strong>
+            <span>Courses (FOAIO, COA, DAA, DBMS, DMCS), Faculty, Rooms (F101–F113, F301–F308, C001–C016), Sections (AIML Rhinos, Tigers, Leopards, Panthers, Wolves, Whales)</span>
+          </div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step">
+            <strong>02. CONSTRAINTS</strong>
+            <span>Hard Rules (Faculty/Room/Cohort Collisions) + Soft Preferences</span>
+          </div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step">
+            <strong>03. MASSIVE SEARCH SPACE</strong>
+            <span>Exponential combinations (O(|Slots|<sup>|Courses|</sup>))</span>
+          </div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step">
+            <strong>04. MULTIPLE OBJECTIVES</strong>
+            <span>Feasibility, ergonomics, room utilization</span>
+          </div>
+          <div class="funnel-arrow">↓</div>
+          <div class="funnel-step highlight">
+            <strong>05. AI-BASED SCHEDULING</strong>
+            <span>Intelligent search &amp; multi-objective optimization</span>
+          </div>
+        </div>
+
+        <!-- 4 Concise AI Concepts -->
+        <div class="ai-four-pillars">
+          <div class="pillar-box">
+            <div class="pillar-code">CONCEPT 01</div>
+            <h4>SEARCH</h4>
+            <p>Explores possible timetable states efficiently without blind brute-force guessing.</p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-code">CONCEPT 02</div>
+            <h4>CSP</h4>
+            <p>Enforces hard physical constraints via domain pruning and Arc Consistency.</p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-code">CONCEPT 03</div>
+            <h4>OPTIMIZATION</h4>
+            <p>Evolves candidate schedules to maximize quality and balance daily workloads.</p>
+          </div>
+
+          <div class="pillar-box">
+            <div class="pillar-code">CONCEPT 04</div>
+            <h4>FUZZY LOGIC</h4>
+            <p>Handles human preferences continuously instead of rigid binary rejection.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="why-ai-bottom-goal">
+        “Goal: <span>Find a feasible timetable</span>, then <span>improve its quality</span>.”
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 04 — FORMULATING THE AI PROBLEM (INTERACTIVE DIAGRAM)
+       ========================================================================== -->
+  <section class="pitch-screen tinted-blue" id="formulation">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag"><span class="dot"></span> 04 / AI FORMULATION</div>
+        <h2 class="pitch-title">From Real-World Problem → AI Problem</h2>
+        <p class="pitch-subtitle">
+          Translating administrative requirements into standard AI state-space terminology.
+        </p>
+      </div>
+
+      <div class="formulation-cards-grid">
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>STATE (s)</strong>
+            <span>Definition</span>
+          </div>
+          <p>A partially or fully assigned timetable configuration.</p>
+        </div>
+
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>ACTION (a)</strong>
+            <span>Operator</span>
+          </div>
+          <p>Assign a specific course to an available room and time slot.</p>
+        </div>
+
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>GOAL (s*)</strong>
+            <span>Objective</span>
+          </div>
+          <p>A 100% valid schedule with optimized preference quality.</p>
+        </div>
+
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>STATE SPACE (S)</strong>
+            <span>Topology</span>
+          </div>
+          <p>The set of all conceivable assignment configurations.</p>
+        </div>
+
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>PATH COST (g)</strong>
+            <span>Penalty</span>
+          </div>
+          <p>Cumulative constraint breaches and preference penalties.</p>
+        </div>
+
+        <div class="formal-card">
+          <div class="formal-header">
+            <strong>HEURISTIC (h)</strong>
+            <span>Estimation</span>
+          </div>
+          <p>Estimated remaining scheduling cost for unassigned courses.</p>
+        </div>
+      </div>
+
+      <!-- Small Visual State Progression -->
+      <div class="state-progression-bar">
+        <div class="prog-node">
+          <span class="step">01</span>
+          <strong>EMPTY TIMETABLE</strong>
+          <span>Unassigned variables</span>
+        </div>
+        <div class="prog-node">
+          <span class="step">02</span>
+          <strong>PARTIAL TIMETABLE</strong>
+          <span>Domain pruning in action</span>
+        </div>
+        <div class="prog-node">
+          <span class="step">03</span>
+          <strong>VALID TIMETABLE</strong>
+          <span>Zero hard violations</span>
+        </div>
+        <div class="prog-node">
+          <span class="step">04</span>
+          <strong>OPTIMIZED TIMETABLE</strong>
+          <span>Preference-maximized</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 05 — LITERATURE REVIEW & EVIDENCE BASE (DETAILED SECTION)
+       ========================================================================== -->
+  <section class="pitch-screen" id="research">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> 05 / LITERATURE REVIEW</div>
+        <h2 class="pitch-title">What Has Already Been Done?</h2>
+        <p class="pitch-subtitle">
+          “From constraint satisfaction to evolutionary optimization.”
+        </p>
+      </div>
+
+      <!-- 6 Categories Strip -->
+      <div class="lit-categories-strip">
+        <div class="lit-cat-chip">
+          <span class="num">01</span>
+          <strong>CONSTRAINT SATISFACTION</strong>
+        </div>
+        <div class="lit-cat-chip">
+          <span class="num">02</span>
+          <strong>SEARCH-BASED METHODS</strong>
+        </div>
+        <div class="lit-cat-chip">
+          <span class="num">03</span>
+          <strong>GENETIC / EVOLUTIONARY</strong>
+        </div>
+        <div class="lit-cat-chip">
+          <span class="num">04</span>
+          <strong>SIMULATED ANNEALING / PSO</strong>
+        </div>
+        <div class="lit-cat-chip">
+          <span class="num">05</span>
+          <strong>FUZZY / PREFERENCE</strong>
+        </div>
+        <div class="lit-cat-chip">
+          <span class="num">06</span>
+          <strong>HYBRID APPROACHES</strong>
+        </div>
+      </div>
+
+      <!-- Expandable Literature Review Table -->
+      <div class="lit-table-card">
+        <div class="lit-table-bar">
+          <h4>Literature Review Table &amp; Comparative Evidence Base</h4>
+          <span class="lit-badge">ACADEMIC EVIDENCE BASE • REVIEW 01</span>
+        </div>
+
+        <div class="table-responsive-wrapper">
+          <table class="pitch-lit-table">
+            <thead>
+              <tr>
+                <th>Study</th>
+                <th>Year</th>
+                <th>Method</th>
+                <th>Key Contribution</th>
+                <th>Limitation</th>
+                <th>Relevance</th>
+                <th>Expand</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Row 1: Burke et al. -->
+              <tr class="lit-summary-row" onclick="toggleLitPitchRow('pitch-lit-1')">
+                <td class="paper-col"><strong>Burke, E. K. et al.</strong><br><small style="color: var(--text-muted);">State of the Art in Automated Timetabling</small></td>
+                <td class="mono">2004</td>
+                <td><span class="method-tag">Metaheuristics &amp; CSP</span></td>
+                <td>Demonstrated trade-offs between feasibility and preference optimization.</td>
+                <td>High constraint repair overhead.</td>
+                <td>Confirms necessity of decoupling feasibility from optimization.</td>
+                <td class="expand-icon">+</td>
+              </tr>
+              <tr class="lit-detail-row" id="pitch-lit-1">
+                <td colspan="7">
+                  <div class="lit-detail-box">
+                    <div class="lit-block">
+                      <h5>Problem</h5>
+                      <p>University course and exam scheduling across large heterogeneous departments.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Method</h5>
+                      <p>Comprehensive comparative survey of tabu search, local search, and genetic algorithms.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Finding</h5>
+                      <p>Single isolated algorithms fail to balance hard constraints with subjective preferences.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Relevance to Our Project</h5>
+                      <p>Provides theoretical motivation for our multi-tiered hybrid architecture.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 2: Schaerf -->
+              <tr class="lit-summary-row" onclick="toggleLitPitchRow('pitch-lit-2')">
+                <td class="paper-col"><strong>Schaerf, A.</strong><br><small style="color: var(--text-muted);">A Survey of Automated Timetabling</small></td>
+                <td class="mono">1999</td>
+                <td><span class="method-tag">Graph Coloring</span></td>
+                <td>Formulated timetabling as an NP-complete graph vertex coloring problem.</td>
+                <td>Cannot capture room capacities easily.</td>
+                <td>Provides the mathematical foundation for our CSP formulation.</td>
+                <td class="expand-icon">+</td>
+              </tr>
+              <tr class="lit-detail-row" id="pitch-lit-2">
+                <td colspan="7">
+                  <div class="lit-detail-box">
+                    <div class="lit-block">
+                      <h5>Problem</h5>
+                      <p>Unification of school, university, and exam timetabling models.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Method</h5>
+                      <p>Reduction to graph coloring where courses are vertices and clashes are edges.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Finding</h5>
+                      <p>Pure graph coloring guarantees non-collision but ignores human preference elasticity.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Relevance to Our Project</h5>
+                      <p>Used to construct our conflict clash matrix and variable domains.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 3: De Werra -->
+              <tr class="lit-summary-row" onclick="toggleLitPitchRow('pitch-lit-3')">
+                <td class="paper-col"><strong>De Werra, D.</strong><br><small style="color: var(--text-muted);">An Introduction to Timetabling</small></td>
+                <td class="mono">1985</td>
+                <td><span class="method-tag">Mathematical Modeling</span></td>
+                <td>Proved that multi-faculty room assignment creates intractable search spaces.</td>
+                <td>Infeasible runtime for large datasets.</td>
+                <td>Direct proof of why AI heuristic search is required.</td>
+                <td class="expand-icon">+</td>
+              </tr>
+              <tr class="lit-detail-row" id="pitch-lit-3">
+                <td colspan="7">
+                  <div class="lit-detail-box">
+                    <div class="lit-block">
+                      <h5>Problem</h5>
+                      <p>Class-teacher timetable assignment under strict physical limits.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Method</h5>
+                      <p>Integer programming and deterministic matrix formulations.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Finding</h5>
+                      <p>Mathematical solvers fail to scale as faculty counts exceed basic thresholds.</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Relevance to Our Project</h5>
+                      <p>Justifies replacing pure math programming with AI CSP + genetic search.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 4: Placeholder for Team Paper 1 -->
+              <tr class="lit-summary-row" onclick="toggleLitPitchRow('pitch-lit-4')">
+                <td class="paper-col"><strong>[VERIFIED PAPER: Evolutionary Scheduling]</strong><br><small style="color: var(--text-muted);">[AUTHOR] • Candidate Research Study</small></td>
+                <td class="mono">[YEAR]</td>
+                <td><span class="method-tag">Genetic Algorithms</span></td>
+                <td>[KEY FINDING / PARETO OPTIMALITY CONTRIBUTION]</td>
+                <td>Slow convergence on dense constraints.</td>
+                <td>Informs our GA optimization engine design.</td>
+                <td class="expand-icon">+</td>
+              </tr>
+              <tr class="lit-detail-row" id="pitch-lit-4">
+                <td colspan="7">
+                  <div class="lit-detail-box">
+                    <div class="lit-block">
+                      <h5>Problem</h5>
+                      <p>[INSERT VERIFIED RESEARCH PROBLEM]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Method</h5>
+                      <p>[INSERT SPECIFIC EVOLUTIONARY ALGORITHM OPERATORS]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Finding</h5>
+                      <p>[INSERT EXPERIMENTAL RESULT AND BENCHMARK]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Relevance to Our Project</h5>
+                      <p>Will be benchmarked during Review 2 implementation.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+
+              <!-- Row 5: Placeholder for Team Paper 2 -->
+              <tr class="lit-summary-row" onclick="toggleLitPitchRow('pitch-lit-5')">
+                <td class="paper-col"><strong>[VERIFIED PAPER: Fuzzy Constraint Satisfaction]</strong><br><small style="color: var(--text-muted);">[AUTHOR] • Candidate Preference Study</small></td>
+                <td class="mono">[YEAR]</td>
+                <td><span class="method-tag">Fuzzy Logic &amp; Inference</span></td>
+                <td>[KEY FINDING: CONTINUOUS MEMBERSHIP FOR ACADEMIC PREFERENCES]</td>
+                <td>Lacks global search coupling.</td>
+                <td>Informs our fuzzy soft preference scoring.</td>
+                <td class="expand-icon">+</td>
+              </tr>
+              <tr class="lit-detail-row" id="pitch-lit-5">
+                <td colspan="7">
+                  <div class="lit-detail-box">
+                    <div class="lit-block">
+                      <h5>Problem</h5>
+                      <p>[INSERT VERIFIED FUZZY SCHEDULING OBJECTIVE]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Method</h5>
+                      <p>[INSERT MEMBERSHIP FUNCTIONS &amp; INFERENCE RULES]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Finding</h5>
+                      <p>[INSERT VALIDATED DEGREE-BASED RESULTS]</p>
+                    </div>
+                    <div class="lit-block">
+                      <h5>Relevance to Our Project</h5>
+                      <p>Theoretical basis for Section 09 soft objective scoring.</p>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 06 — RESEARCH GAP (VISUAL TRANSITION)
+       ========================================================================== -->
+  <section class="pitch-screen tinted" id="gap">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag"><span class="dot"></span> 06 / RESEARCH GAP</div>
+        <h2 class="pitch-title">Where Does Our Project Fit?</h2>
+        <p class="pitch-subtitle">
+          Bridging fragmented scheduling methods into an integrated AI framework.
+        </p>
+      </div>
+
+      <div class="gap-pitch-grid">
+        <!-- Existing -->
+        <div class="gap-box existing">
+          <h4 class="gap-box-title">EXISTING RESEARCH</h4>
+          <div class="gap-list">
+            <div class="gap-list-item">CSP: Strong on feasibility, rigid on preferences.</div>
+            <div class="gap-list-item">Search: Good for small trees, memory heavy at scale.</div>
+            <div class="gap-list-item">GA / PSO: Strong on optimization, violates hard constraints.</div>
+            <div class="gap-list-item">Fuzzy Logic: Strong on preferences, cannot build full grids alone.</div>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); margin-top: 1rem;">
+            Different techniques address different scheduling challenges in isolation.
+          </div>
+        </div>
+
+        <!-- Arrow -->
+        <div class="gap-arrow-col">→</div>
+
+        <!-- Proposed Direction -->
+        <div class="gap-box proposed">
+          <h4 class="gap-box-title" style="color: var(--blue-700);">OUR PROPOSED DIRECTION</h4>
+          <div class="gap-list">
+            <div class="gap-list-item proposed-item">CONSTRAINT HANDLING: 100% hard feasibility via CSP.</div>
+            <div class="gap-list-item proposed-item">GUIDED SEARCH: Fast seed solutions via A* heuristics.</div>
+            <div class="gap-list-item proposed-item">OPTIMIZATION: Population refinement via Genetic Algorithms.</div>
+            <div class="gap-list-item proposed-item">PREFERENCE MODELING: Realistic elastic scores via Fuzzy Logic.</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Concise Gap Statement -->
+      <div class="gap-statement-card">
+        <div class="tag">PROPOSED RESEARCH DIRECTION</div>
+        <p>
+          “We investigate how complementary AI techniques can be combined into a unified timetable-generation framework.”
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 07 — OUR PROPOSED APPROACH (5-STEP PIPELINE)
+       ========================================================================== -->
+  <section class="pitch-screen" id="approach">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> 07 / AI ALGORITHMS &amp; WORKFLOW</div>
+        <h2 class="pitch-title">How the AI Engine Builds the Timetable</h2>
+        <p class="pitch-subtitle">
+          Turning 150,000 messy campus possibilities into a 100% collision-free, student-friendly schedule in 44 milliseconds.
+        </p>
+      </div>
+
+      <!-- Interactive Tab Bar -->
+      <div class="approach-tabs-nav">
+        <button type="button" class="approach-tab-btn active" data-app-tab="pipeline">
+          <span class="tab-icon">🚀</span>
+          <span class="tab-label">5-Stage AI Workflow</span>
+          <span class="tab-badge">Step-by-Step</span>
+        </button>
+        <button type="button" class="approach-tab-btn" data-app-tab="algorithms">
+          <span class="tab-icon">🧠</span>
+          <span class="tab-label">Core AI Algorithms</span>
+          <span class="tab-badge">Simple English</span>
+        </button>
+        <button type="button" class="approach-tab-btn" data-app-tab="rules">
+          <span class="tab-icon">⚖️</span>
+          <span class="tab-label">Hard vs. Soft Rules</span>
+          <span class="tab-badge">Constraints</span>
+        </button>
+      </div>
+
+      <!-- ================================================================
+           TAB 1: 5-STAGE WORKFLOW PIPELINE
+           ================================================================ -->
+      <div class="approach-panel active" id="app-panel-pipeline">
+        <!-- Visual Flow Tracker -->
+        <div class="app-flow-tracker">
+          <div class="app-tracker-step">
+            <span class="app-tracker-num">1</span>
+            <span>Input (Puzzle Pieces)</span>
+          </div>
+          <span class="app-tracker-arrow">➔</span>
+          <div class="app-tracker-step">
+            <span class="app-tracker-num" style="background:#059669;">2</span>
+            <span>AC-3 Filter (Bouncer)</span>
+          </div>
+          <span class="app-tracker-arrow">➔</span>
+          <div class="app-tracker-step">
+            <span class="app-tracker-num" style="background:#d97706;">3</span>
+            <span>MRV (Toughest First)</span>
+          </div>
+          <span class="app-tracker-arrow">➔</span>
+          <div class="app-tracker-step">
+            <span class="app-tracker-num" style="background:#7c3aed;">4</span>
+            <span>LCV &amp; Backtrack (Friendly)</span>
+          </div>
+          <span class="app-tracker-arrow">➔</span>
+          <div class="app-tracker-step">
+            <span class="app-tracker-num" style="background:#0891b2;">5</span>
+            <span>Comfort Polish (Human Touch)</span>
+          </div>
+        </div>
+
+        <!-- 5 Pipeline Stage Cards -->
+        <div class="app-pipeline-grid">
+          <!-- Stage 1 -->
+          <div class="app-stage-card">
+            <div class="app-stage-top-row">
+              <span class="app-stage-num-badge" style="background:#eff6ff; color:#1d4ed8;">Step 01</span>
+              <div class="app-stage-icon-wrap" style="background:#eff6ff; color:#2563eb;">🧩</div>
+            </div>
+            <h4 class="app-stage-title">Gathering Puzzle Pieces</h4>
+            <span class="app-stage-algo-sub">CSP Formulation</span>
+            <div class="app-simple-box">
+              <strong>In Plain English:</strong>
+              Every single lecture is treated like a puzzle piece. It requires 3 matching things at once: a free teacher, an empty classroom, and an open student hour.
+            </div>
+            <div class="app-campus-box">
+              <strong>Woxsen Scale:</strong>
+              120 faculty, 41 cohorts (Tigers, Rhinos, etc.), 32 rooms. Over 150,000 combinations to test!
+            </div>
+          </div>
+
+          <!-- Stage 2 -->
+          <div class="app-stage-card">
+            <div class="app-stage-top-row">
+              <span class="app-stage-num-badge" style="background:#ecfdf5; color:#047857;">Step 02</span>
+              <div class="app-stage-icon-wrap" style="background:#ecfdf5; color:#059669;">⚡</div>
+            </div>
+            <h4 class="app-stage-title">The Instant Filter</h4>
+            <span class="app-stage-algo-sub">AC-3 Arc Consistency</span>
+            <div class="app-simple-box">
+              <strong>In Plain English:</strong>
+              "The Smart Bouncer". Before guessing, the AI crosses off impossible options. If a room has only 40 seats, it's instantly eliminated for an 80-student cohort.
+            </div>
+            <div class="app-campus-box">
+              <strong>Speed Boost:</strong>
+              Cuts out 65% of bad guesses in under 3 milliseconds before searching even starts.
+            </div>
+          </div>
+
+          <!-- Stage 3 -->
+          <div class="app-stage-card">
+            <div class="app-stage-top-row">
+              <span class="app-stage-num-badge" style="background:#fffbeb; color:#b45309;">Step 03</span>
+              <div class="app-stage-icon-wrap" style="background:#fffbeb; color:#d97706;">🎯</div>
+            </div>
+            <h4 class="app-stage-title">Hardest Classes First</h4>
+            <span class="app-stage-algo-sub">MRV (Fail-First Heuristic)</span>
+            <div class="app-simple-box">
+              <strong>In Plain English:</strong>
+              "Corner Pieces First". Like doing the corner pieces of a jigsaw puzzle first, the AI locks in continuous 2-hour labs and busy faculty before single theory slots.
+            </div>
+            <div class="app-campus-box">
+              <strong>Woxsen Example:</strong>
+              2-Hour AI Labs in Room F-307 get placed first so rooms don't get blocked by 1-hour theory lectures.
+            </div>
+          </div>
+
+          <!-- Stage 4 -->
+          <div class="app-stage-card">
+            <div class="app-stage-top-row">
+              <span class="app-stage-num-badge" style="background:#f5f3ff; color:#6d28d9;">Step 04</span>
+              <div class="app-stage-icon-wrap" style="background:#f5f3ff; color:#7c3aed;">🤝</div>
+            </div>
+            <h4 class="app-stage-title">Polite Room Placement</h4>
+            <span class="app-stage-algo-sub">LCV &amp; Backtracking</span>
+            <div class="app-simple-box">
+              <strong>In Plain English:</strong>
+              "The Considerate Neighbor". The AI picks the room and time that leaves the most doors open for remaining classes. If blocked, it takes 1 step back and tries the next best choice.
+            </div>
+            <div class="app-campus-box">
+              <strong>Zero-Clash:</strong>
+              Guarantees zero professor double-bookings and zero room overlaps.
+            </div>
+          </div>
+
+          <!-- Stage 5 -->
+          <div class="app-stage-card">
+            <div class="app-stage-top-row">
+              <span class="app-stage-num-badge" style="background:#ecfeff; color:#0e7490;">Step 05</span>
+              <div class="app-stage-icon-wrap" style="background:#ecfeff; color:#0891b2;">✨</div>
+            </div>
+            <h4 class="app-stage-title">Human Comfort Polish</h4>
+            <span class="app-stage-algo-sub">Soft Multi-Objective Scoring</span>
+            <div class="app-simple-box">
+              <strong>In Plain English:</strong>
+              Zero clashes is good, but human happiness is better. The AI tweaks the timetable to eliminate long, tiring gaps where students wait idle in cafeterias.
+            </div>
+            <div class="app-campus-box">
+              <strong>Daily Balance:</strong>
+              Limits faculty to max 4 classes per day and protects Friday afternoon research blocks.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 2: 4 CORE AI ALGORITHMS IN SIMPLE ENGLISH
+           ================================================================ -->
+      <div class="approach-panel" id="app-panel-algorithms">
+        <div class="app-algo-grid">
+          <!-- Algorithm 1 -->
+          <div class="app-algo-card" style="border-top: 4px solid #2563eb;">
+            <div class="app-algo-card-head">
+              <span class="algo-emoji">🧩</span>
+              <div>
+                <h4>1. Constraint Satisfaction Problem (CSP)</h4>
+                <span class="app-algo-syllabus-tag">Unit 2 • Core AI Formulation</span>
+              </div>
+            </div>
+            <div class="app-algo-analogy-banner">
+              💡 Real-World Analogy: "University-Scale Sudoku"
+            </div>
+            <p class="app-algo-desc">
+              Instead of humans arguing over spreadsheets for weeks, CSP treats the timetable like a giant Sudoku puzzle with clear mathematical rules.
+            </p>
+            <div class="app-algo-bullets">
+              <ul>
+                <li><strong>Variables (Cells):</strong> 140+ individual lectures waiting to be scheduled.</li>
+                <li><strong>Domains (Numbers):</strong> Allowed classrooms (F101–F113, C001–C016) and times (9 AM - 6 PM).</li>
+                <li><strong>Constraints (Rules):</strong> No faculty, room, or student cohort can be in two places at once.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Algorithm 2 -->
+          <div class="app-algo-card" style="border-top: 4px solid #059669;">
+            <div class="app-algo-card-head">
+              <span class="algo-emoji">⚡</span>
+              <div>
+                <h4>2. Mackworth's Arc Consistency (AC-3)</h4>
+                <span class="app-algo-syllabus-tag">Unit 2 • Domain Pruning</span>
+              </div>
+            </div>
+            <div class="app-algo-analogy-banner">
+              💡 Real-World Analogy: "The Smart Bouncer at the Door"
+            </div>
+            <p class="app-algo-desc">
+              When a venue is full, the bouncer turns people away before they wait in line. AC-3 eliminates impossible room and time combinations before searching even begins.
+            </p>
+            <div class="app-algo-bullets">
+              <ul>
+                <li><strong>Early Elimination:</strong> Deletes unavailable hours instantly without guessing.</li>
+                <li><strong>Ripple Warning:</strong> If Room F-102 is booked at 10 AM, AC-3 updates all 41 cohorts instantly.</li>
+                <li><strong>Speed Boost:</strong> Cuts search time from hours down to just <strong>44 milliseconds</strong>.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Algorithm 3 -->
+          <div class="app-algo-card" style="border-top: 4px solid #d97706;">
+            <div class="app-algo-card-head">
+              <span class="algo-emoji">🎯</span>
+              <div>
+                <h4>3. Minimum Remaining Values (MRV Heuristic)</h4>
+                <span class="app-algo-syllabus-tag">Unit 1 &amp; 2 • Heuristic Search</span>
+              </div>
+            </div>
+            <div class="app-algo-analogy-banner">
+              💡 Real-World Analogy: "Putting the Big Rocks in the Jar First"
+            </div>
+            <p class="app-algo-desc">
+              If you put sand in a jar first, the big rocks will never fit. MRV forces the computer to schedule the hardest, most restricted classes first.
+            </p>
+            <div class="app-algo-bullets">
+              <ul>
+                <li><strong>Toughest First:</strong> Locks in continuous 2-hour AI and DBMS practical labs before simple theory slots.</li>
+                <li><strong>Fail-First Principle:</strong> Catches potential conflicts immediately when they are easiest to solve.</li>
+                <li><strong>Dead-End Prevention:</strong> Eliminates 90% of painful timetable dead-ends.</li>
+              </ul>
+            </div>
+          </div>
+
+          <!-- Algorithm 4 -->
+          <div class="app-algo-card" style="border-top: 4px solid #7c3aed;">
+            <div class="app-algo-card-head">
+              <span class="algo-emoji">🤝</span>
+              <div>
+                <h4>4. Least Constraining Value (LCV Heuristic)</h4>
+                <span class="app-algo-syllabus-tag">Unit 2 • Value Ordering</span>
+              </div>
+            </div>
+            <div class="app-algo-analogy-banner">
+              💡 Real-World Analogy: "The Considerate Roommate"
+            </div>
+            <p class="app-algo-desc">
+              When storing food in a shared fridge, you pick the shelf that leaves room for everyone else. LCV chooses the room and time that leaves the most choices open for others.
+            </p>
+            <div class="app-algo-bullets">
+              <ul>
+                <li><strong>Succeed-First:</strong> Maximizes the chance of completing the timetable on the first try.</li>
+                <li><strong>Flexibility:</strong> Leaves popular rooms free for larger sections that genuinely need them.</li>
+                <li><strong>Minimal Backtracking:</strong> Prevents cascading timetable reshuffles.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           TAB 3: HARD VS SOFT RULES
+           ================================================================ -->
+      <div class="approach-panel" id="app-panel-rules">
+        <div class="app-rules-grid">
+          <!-- Hard Rules -->
+          <div class="app-rule-card hard">
+            <div class="app-rule-header">
+              <span class="app-rule-icon">🔴</span>
+              <div class="app-rule-title-wrap">
+                <h4>HARD CONSTRAINTS</h4>
+                <div class="app-rule-sub">Physical Laws • 100% Non-Negotiable</div>
+              </div>
+            </div>
+            <p class="app-rule-desc">
+              These rules cannot be broken under any circumstances. If even one is violated, the schedule is physically impossible to execute in the university.
+            </p>
+            <div class="app-rule-item">
+              <span class="rule-icon">🚫</span>
+              <div><strong>No Faculty Overlaps:</strong> Dr. Himanshu Pandit cannot lecture in Room F101 and Room F102 at the same hour.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">🚫</span>
+              <div><strong>No Room Overlaps:</strong> Room F307 cannot host AIML Tigers and AIML Rhinos simultaneously.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">🚫</span>
+              <div><strong>No Cohort Clashes:</strong> AIML Tigers students cannot have FOAIO and DAA at the exact same time.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">⏱️</span>
+              <div><strong>Continuous Lab Blocks:</strong> 2-hour practical computer sessions must occupy two uninterrupted consecutive slots.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">📐</span>
+              <div><strong>Room Capacity Compliance:</strong> An 80-student cohort is never assigned to a 40-seat classroom.</div>
+            </div>
+          </div>
+
+          <!-- Soft Rules -->
+          <div class="app-rule-card soft">
+            <div class="app-rule-header">
+              <span class="app-rule-icon">🟢</span>
+              <div class="app-rule-title-wrap">
+                <h4>SOFT CONSTRAINTS</h4>
+                <div class="app-rule-sub">Human Comfort &amp; Academic Convenience</div>
+              </div>
+            </div>
+            <p class="app-rule-desc">
+              These rules measure quality of life. The AI scores solutions and minimizes penalties to create comfortable, healthy schedules for students and teachers.
+            </p>
+            <div class="app-rule-item">
+              <span class="rule-icon">☕</span>
+              <div><strong>Minimal Student Idle Gaps:</strong> Eliminates painful 3-hour waiting gaps between morning and afternoon lectures.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">⚖️</span>
+              <div><strong>Balanced Daily Load:</strong> Distributes lectures evenly across Monday–Friday (3–4 hrs/day) instead of exhausting 6-hour marathons.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">🔬</span>
+              <div><strong>Protected Research Blocks:</strong> Protects dedicated research, PhD guidance, and committee hours on Friday afternoons.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">🏛️</span>
+              <div><strong>Campus Building Proximity:</strong> Keeps cohorts clustered in their home building (F-Block or C-Block) to prevent long walking treks.</div>
+            </div>
+            <div class="app-rule-item">
+              <span class="rule-icon">🌅</span>
+              <div><strong>Fair Early Slot Rotation:</strong> Rotates early 9:00 AM slots fairly across courses instead of overburdening one subject.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Candidate Algorithms Footnote -->
+      <div class="algo-evaluation-tags">
+        <span class="mono" style="font-size: 0.75rem; color: var(--text-muted); margin-right: 0.5rem; text-transform: uppercase;">Algorithms Implemented &amp; Tested:</span>
+        <span class="algo-tag-pill" style="border-color:#2563eb; color:#2563eb;">Constraint Satisfaction (CSP)</span>
+        <span class="algo-tag-pill" style="border-color:#059669; color:#059669;">Arc Consistency (AC-3)</span>
+        <span class="algo-tag-pill" style="border-color:#d97706; color:#d97706;">MRV (Fail-First)</span>
+        <span class="algo-tag-pill" style="border-color:#7c3aed; color:#7c3aed;">LCV (Succeed-First)</span>
+        <span class="algo-tag-pill" style="border-color:#0891b2; color:#0891b2;">Multi-Objective Scoring</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 08 — COURSE CONNECTION (4 CLUSTERS + CENTRAL HUB)
+       ========================================================================== -->
+  <section class="pitch-screen tinted-blue" id="course">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag"><span class="dot"></span> 08 / COURSE CONNECTION</div>
+        <h2 class="pitch-title">Built From the Foundations of AI</h2>
+        <p class="pitch-subtitle">
+          Direct pedagogical alignment mapping four major syllabus clusters to our generator.
+        </p>
+      </div>
+
+      <div class="course-map-layout">
+        <!-- Left 2 Clusters -->
+        <div class="course-cluster-col">
+          <div class="course-cluster-card">
+            <span class="cat-num">CLUSTER 01</span>
+            <h4>PROBLEM SOLVING</h4>
+            <ul>
+              <li>AI Problem Formulation</li>
+              <li>State Space Representation</li>
+              <li>Task Environment Classification</li>
+            </ul>
+          </div>
+
+          <div class="course-cluster-card">
+            <span class="cat-num">CLUSTER 02</span>
+            <h4>SEARCH</h4>
+            <ul>
+              <li>BFS &amp; DFS Baselines</li>
+              <li>Greedy Best-First Search</li>
+              <li>A* Heuristic Search [f = g + h]</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Center Hub -->
+        <div class="course-center-hub">
+          <div class="ai-core-icon" style="margin-bottom: 1rem;">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          </div>
+          <h3>TIMETABLE GENERATOR</h3>
+          <p>Central project synthesis connecting syllabus theory to practical university scheduling.</p>
+        </div>
+
+        <!-- Right 2 Clusters -->
+        <div class="course-cluster-col">
+          <div class="course-cluster-card">
+            <span class="cat-num">CLUSTER 03</span>
+            <h4>CONSTRAINT + OPTIMIZATION</h4>
+            <ul>
+              <li>Constraint Satisfaction (CSP)</li>
+              <li>Multi-Objective Functions</li>
+              <li>Genetic Algorithms (GA)</li>
+              <li>Simulated Annealing / PSO</li>
+            </ul>
+          </div>
+
+          <div class="course-cluster-card">
+            <span class="cat-num">CLUSTER 04</span>
+            <h4>PREFERENCE REASONING</h4>
+            <ul>
+              <li>Fuzzy Sets &amp; Membership Functions</li>
+              <li>Linguistic Rule Inference</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 09 — ONE SIMPLE TECHNICAL DEEP DIVE (WHAT AI OPTIMIZES)
+       ========================================================================== -->
+  <section class="pitch-screen" id="deep-dive">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> 09 / TECHNICAL DEEP DIVE</div>
+        <h2 class="pitch-title">What Does the AI Actually Optimize?</h2>
+        <p class="pitch-subtitle">
+          Balancing non-negotiable hard feasibility against qualitative soft desirability.
+        </p>
+      </div>
+
+      <div class="deep-dive-grid">
+        <!-- Layer 1: Hard -->
+        <div class="deep-layer-card hard">
+          <div class="deep-layer-title">
+            <h4>HARD CONSTRAINTS</h4>
+            <span class="mono" style="font-size: 0.72rem; color: var(--blue-700); font-weight: 700;">MUST BE SATISFIED</span>
+          </div>
+          <ul class="deep-items-list">
+            <li><strong>Faculty:</strong> Dr. Malli, Dr. Muralidhar, Dr. Pasha cannot teach two sections at once.</li>
+            <li><strong>Room:</strong> Classrooms (F101–F113, F301–F308, C001–C016) cannot host two classes simultaneously.</li>
+            <li><strong>Sections:</strong> Cohorts (Rhinos, Tigers, Leopards, Panthers, Wolves, Whales) cannot have concurrent classes.</li>
+            <li><strong>Availability:</strong> Honor contracted research blocks and lab facility constraints.</li>
+          </ul>
+        </div>
+
+        <!-- Layer 2: Soft -->
+        <div class="deep-layer-card soft">
+          <div class="deep-layer-title">
+            <h4>SOFT OBJECTIVES</h4>
+            <span class="mono" style="font-size: 0.72rem; color: var(--orange-700); font-weight: 700;">SHOULD BE IMPROVED</span>
+          </div>
+          <ul class="deep-items-list">
+            <li><strong>Preferences:</strong> Honor morning/afternoon slot choices.</li>
+            <li><strong>Gaps:</strong> Minimize student idle waiting hours.</li>
+            <li><strong>Workload:</strong> Balance daily hours evenly across week.</li>
+            <li><strong>Utilization:</strong> Cluster classroom facility energy.</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Formula Strip -->
+      <div class="formula-strip-box">
+        <div class="formula-display-text">
+          TOTAL COST = <span>Constraint Penalties</span> + <span>Preference Penalties</span> + <span>Quality Penalties</span>
+        </div>
+        <small>“Exact weights will be determined experimentally in Review 2.”</small>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 10 — PROJECT ROADMAP (3-STAGE TIMELINE)
+       ========================================================================== -->
+  <section class="pitch-screen tinted" id="roadmap">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag"><span class="dot"></span> 10 / PROJECT ROADMAP</div>
+        <h2 class="pitch-title">Three Reviews. One AI System.</h2>
+        <p class="pitch-subtitle">
+          A realistic three-phase progression from foundation to evaluation.
+        </p>
+      </div>
+
+      <div class="roadmap-three-stages">
+        <!-- Review 1: Current -->
+        <div class="road-stage-card current">
+          <span class="road-badge">CURRENT STAGE • REVIEW 01</span>
+          <h3>REVIEW 01</h3>
+          <div class="road-tagline">FOUNDATION</div>
+          <ul class="road-bullets">
+            <li>Problem Formulation</li>
+            <li>Literature Review</li>
+            <li>Research Gap</li>
+            <li>AI Formulation</li>
+            <li>Proposed Architecture</li>
+          </ul>
+        </div>
+
+        <!-- Review 2: Implementation -->
+        <div class="road-stage-card future">
+          <span class="road-badge">UPCOMING • REVIEW 02</span>
+          <h3>REVIEW 02</h3>
+          <div class="road-tagline">IMPLEMENTATION</div>
+          <ul class="road-bullets">
+            <li>CSP Engine &amp; AC-3</li>
+            <li>Search Algorithms</li>
+            <li>Genetic Optimizer</li>
+            <li>Working Prototype</li>
+          </ul>
+        </div>
+
+        <!-- Review 3: Evaluation -->
+        <div class="road-stage-card future">
+          <span class="road-badge">UPCOMING • REVIEW 03</span>
+          <h3>REVIEW 03</h3>
+          <div class="road-tagline">EVALUATION</div>
+          <ul class="road-bullets">
+            <li>Final Integrated System</li>
+            <li>Algorithm Comparison</li>
+            <li>Performance Metrics</li>
+            <li>Empirical Analysis</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 11 — EXPECTED OUTCOME (4 BOLD OUTCOMES)
+       ========================================================================== -->
+  <section class="pitch-screen" id="outcomes">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> 11 / EXPECTED OUTCOME</div>
+        <h2 class="pitch-title">What Will the Final System Deliver?</h2>
+        <p class="pitch-subtitle">
+          Four tangible engineering and pedagogical outcomes.
+        </p>
+      </div>
+
+      <div class="outcomes-four-quad">
+        <div class="outcome-block">
+          <div class="outcome-icon-check">✓</div>
+          <h4>CONFLICT-FREE</h4>
+          <p>Zero faculty, room, or student cohort clashes.</p>
+        </div>
+
+        <div class="outcome-block">
+          <div class="outcome-icon-check">✓</div>
+          <h4>CONSTRAINT-AWARE</h4>
+          <p>Strict enforcement of room capacities and labs.</p>
+        </div>
+
+        <div class="outcome-block">
+          <div class="outcome-icon-check">✓</div>
+          <h4>OPTIMIZED</h4>
+          <p>Balanced daily workloads without excessive gaps.</p>
+        </div>
+
+        <div class="outcome-block">
+          <div class="outcome-icon-check">✓</div>
+          <h4>PREFERENCE-AWARE</h4>
+          <p>Elastic scoring honoring teacher and student comfort.</p>
+        </div>
+      </div>
+
+      <div class="outcome-synthesis-statement">
+        “An AI-based system capable of generating and evaluating student timetables under <span>real-world scheduling constraints</span>.”
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 11.5 — INTERACTIVE TIMETABLE GENERATOR
+       ========================================================================== -->
+  <section class="pitch-screen" id="live-generator">
+    <div class="container">
+      <div class="pitch-header">
+        <div class="pitch-tag orange-tag"><span class="dot"></span> PROTOTYPE / TIMETABLE GENERATOR</div>
+        <h2 class="pitch-title">AI Timetable Generator Engine</h2>
+        <p class="pitch-subtitle">
+          Generating conflict-free university timetables with zero hard conflicts using CSP backtracking, AC-3 &amp; heuristic search.
+        </p>
+      </div>
+
+      <!-- Generator Preview Card -->
+      <div class="embedded-generator-card">
+        <div class="embed-control-bar">
+          <div class="embed-left-controls">
+            <span class="embed-label">COHORT VIEW:</span>
+            <select id="embed-cohort-select" class="embed-select">
+              <option value="table_10">AIML_RHINOS_2025 (Room 307 - Lab Block)</option>
+              <option value="table_8">AIML_TIGERS_2025 (Room C-007)</option>
+              <option value="table_14">AIML_LEOPARDS_2025 (Room 404 - Lab Block)</option>
+              <option value="table_12">AIML_PANTHERS_2025 (Room 308 - Lab Block)</option>
+              <option value="table_18">AIML_WOLVES_2025 (Room 403 - Lab Block)</option>
+              <option value="table_16">AIML_WHALES_2025 (Room 402 - Lab Block)</option>
+              <option value="table_2">CSE_TIGERS_2025 (Room C-203)</option>
+              <option value="table_4">CSE_RHINOS_2025 (Room 303 - Lab Block)</option>
+              <option value="table_20">DS &amp; BIC_TIGERS_2025 (Law Block E-404)</option>
+              <option value="table_23">ECE_TIGERS_2025 (Room F-106)</option>
+              <option value="table_25">BCA_TIGERS_2025 (Room 304 - Lab Block)</option>
+            </select>
+            <button type="button" id="embed-btn-generate" class="embed-btn-primary">
+              ⚡ Run AI Generator
+            </button>
+          </div>
+          <div class="embed-right-actions">
+            <a href="generator.html" target="_blank" class="embed-btn-studio">
+              Launch Full Generator Studio (41 Groups, 32 Rooms, 120 Teachers) ↗
+            </a>
+          </div>
+        </div>
+
+        <!-- Embedded Table Output Display -->
+        <div class="embed-table-viewport" id="embed-table-display">
+          <!-- Injected by app.js -->
+        </div>
+
+        <div class="embed-footer-metrics">
+          <div class="embed-metric-pill"><span>Algorithm:</span> <strong>CSP + AC-3 + MRV</strong></div>
+          <div class="embed-metric-pill"><span>Hard Conflicts:</span> <strong style="color: #10b981;">0 (Zero Collisions)</strong></div>
+          <div class="embed-metric-pill"><span>Lab Blocks:</span> <strong>2-Hour Consecutive (colspan="2")</strong></div>
+          <div class="embed-metric-pill"><span>Architecture:</span> <strong>Constraint Satisfaction Graph</strong></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       SCREEN 12 — CLOSING (MINIMAL FINAL SCREEN)
+       ========================================================================== -->
+  <section class="pitch-screen closing-pitch-screen" id="closing">
+    <div class="container">
+      <h2 class="closing-pitch-title">
+        “FROM SCHEDULING<br>
+        <span>TO INTELLIGENT SCHEDULING.”</span>
+      </h2>
+
+      <p class="closing-meta-sub">
+        AI-BASED STUDENT TIMETABLE GENERATOR • FOUNDATIONS OF ARTIFICIAL INTELLIGENCE • REVIEW 01
+      </p>
+
+      <div class="team-strip-wrap">
+        <div class="team-card-minimal">
+          <div class="team-avatar-num">01</div>
+          <div class="team-member-name">Himanshu Pandit</div>
+          <div class="mono" style="font-size: 0.72rem; color: var(--blue-600); font-weight: 700; margin: 0.15rem 0;">25WU0102098</div>
+          <div class="team-member-sub">Problem Formulation &amp; Architecture</div>
+        </div>
+
+        <div class="team-card-minimal">
+          <div class="team-avatar-num">02</div>
+          <div class="team-member-name">Heman</div>
+          <div class="mono" style="font-size: 0.72rem; color: var(--blue-600); font-weight: 700; margin: 0.15rem 0;">25WU0102097</div>
+          <div class="team-member-sub">Constraint Satisfaction &amp; AC-3</div>
+        </div>
+
+        <div class="team-card-minimal">
+          <div class="team-avatar-num">03</div>
+          <div class="team-member-name">Rimika Jain</div>
+          <div class="mono" style="font-size: 0.72rem; color: var(--blue-600); font-weight: 700; margin: 0.15rem 0;">25WU0101111</div>
+          <div class="team-member-sub">Heuristic Search &amp; A* Engine</div>
+        </div>
+
+        <div class="team-card-minimal">
+          <div class="team-avatar-num">04</div>
+          <div class="team-member-name">Anirudh Pratap Singh</div>
+          <div class="mono" style="font-size: 0.72rem; color: var(--blue-600); font-weight: 700; margin: 0.15rem 0;">25WU0102111</div>
+          <div class="team-member-sub">Genetic Algorithm Optimization</div>
+        </div>
+
+        <div class="team-card-minimal">
+          <div class="team-avatar-num">05</div>
+          <div class="team-member-name">Raghav Malpani</div>
+          <div class="mono" style="font-size: 0.72rem; color: var(--blue-600); font-weight: 700; margin: 0.15rem 0;">25WU0101103</div>
+          <div class="team-member-sub">Fuzzy Preferences &amp; Evaluation</div>
+        </div>
+      </div>
+
+      <div>
+        <div class="next-action-indicator">
+          <span class="pulse"></span> Next → Implementation
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Minimal Footer -->
+  <footer class="pitch-footer">
+    <div class="container footer-flex">
+      <div><strong>AI-Based Student Timetable Generator</strong> • Woxsen University (B.Tech AI &amp; ML)</div>
+      <div class="mono">Foundations of AI (PBL) • Review 01 Presentation</div>
+    </div>
+  </footer>
+
+  <script src="timetable-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

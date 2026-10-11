@@ -1,0 +1,2523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-US" xml:lang="en-US">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <title>AI Timetable Generator Studio | Woxsen University</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="AI-Based Student Timetable Generator Studio with Resource Ingestion (Teachers, Sections, Classrooms), CSP Constraint Engine, and Feasible Output." />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Modern Timetable Stylesheet -->
+  <link rel="stylesheet" media="all" href="07th September to 11th September Odd Sem timetable_stylesheet.css" type="text/css" />
+
+  <style type="text/css">
+    /* ==========================================================================
+       AI TIMETABLE GENERATOR STUDIO — STYLES
+       ========================================================================== */
+    :root {
+      --primary-blue: #1e40af;
+      --primary-blue-hover: #1d4ed8;
+      --accent-orange: #ea580c;
+      --accent-orange-hover: #c2410c;
+      --bg-slate: #f8fafc;
+      --border-slate: #cbd5e1;
+      --border-light: #e2e8f0;
+      --text-dark: #0f172a;
+      --text-muted: #64748b;
+      --success-green: #10b981;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: var(--bg-slate);
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: var(--text-dark);
+    }
+
+    /* Top Studio Header */
+    .studio-navbar {
+      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      color: #ffffff;
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .brand-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-logo-badge {
+      background: var(--accent-orange);
+      color: #ffffff;
+      font-weight: 800;
+      font-size: 13px;
+      padding: 6px 12px;
+      border-radius: 6px;
+      letter-spacing: 0.05em;
+    }
+
+    .brand-title-wrap h1 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .brand-title-wrap p {
+      margin: 2px 0 0 0;
+      font-size: 11px;
+      color: #94a3b8;
+    }
+
+    .nav-actions-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn-nav-workflow {
+      background: rgba(234, 88, 12, 0.25);
+      color: #ffedd5;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(234, 88, 12, 0.5);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav-workflow:hover {
+      background: var(--accent-orange);
+      color: #ffffff;
+    }
+
+    .btn-nav-return {
+      background: rgba(255, 255, 255, 0.12);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 7px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-nav-return:hover {
+      background: #ffffff;
+      color: #0f172a;
+    }
+
+    /* Workflow Step Navigation */
+    .wizard-step-tracker {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-light);
+      padding: 12px 28px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+    }
+
+    .wizard-steps {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      max-width: 900px;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: 6px 12px;
+      border-radius: 20px;
+      transition: all 0.18s ease;
+      background: transparent;
+      border: 1px solid transparent;
+    }
+
+    .step-item.active {
+      color: var(--primary-blue);
+      background: #eff6ff;
+      border-color: #bfdbfe;
+    }
+
+    .step-item.completed {
+      color: var(--success-green);
+    }
+
+    .step-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #e2e8f0;
+      color: #475569;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .step-item.active .step-num {
+      background: var(--primary-blue);
+      color: #ffffff;
+    }
+
+    .step-item.completed .step-num {
+      background: var(--success-green);
+      color: #ffffff;
+    }
+
+    .step-divider {
+      flex: 1;
+      height: 2px;
+      background: #e2e8f0;
+      max-width: 80px;
+    }
+
+    /* ==========================================================================
+       STAGE 1: DATA INGESTION & SETUP (THE STARTING PAGE)
+       ========================================================================== */
+    .stage-view {
+      display: none;
+    }
+
+    .stage-view.active {
+      display: block;
+    }
+
+    .ingestion-container {
+      max-width: 1300px;
+      margin: 28px auto 60px auto;
+      padding: 0 24px;
+    }
+
+    .ingestion-hero-header {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px 28px;
+      margin-bottom: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+    }
+
+    .ingestion-hero-left h2 {
+      margin: 0 0 6px 0;
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--text-dark);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .ingestion-hero-left p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 720px;
+    }
+
+    .preset-actions-bar {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-preset {
+      padding: 9px 15px;
+      font-size: 12px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .btn-preset-primary {
+      background: var(--accent-orange);
+      color: #ffffff;
+      box-shadow: 0 2px 8px rgba(234, 88, 12, 0.3);
+    }
+
+    .btn-preset-primary:hover {
+      background: var(--accent-orange-hover);
+      transform: translateY(-1px);
+    }
+
+    .btn-preset-outline {
+      background: #ffffff;
+      color: var(--primary-blue);
+      border-color: #bfdbfe;
+    }
+
+    .btn-preset-outline:hover {
+      background: #eff6ff;
+    }
+
+    .btn-preset-danger {
+      background: #ffffff;
+      color: #ef4444;
+      border-color: #fecaca;
+    }
+
+    .btn-preset-danger:hover {
+      background: #fef2f2;
+    }
+
+    /* Sub-tabs for Ingestion */
+    .ingestion-subtabs-nav {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 20px;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .subtab-btn {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #475569;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .subtab-btn:hover {
+      border-color: #93c5fd;
+      color: var(--primary-blue);
+    }
+
+    .subtab-btn.active {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border-color: var(--primary-blue);
+      box-shadow: 0 2px 8px rgba(30, 64, 175, 0.25);
+    }
+
+    .subtab-badge {
+      background: rgba(0, 0, 0, 0.08);
+      font-size: 11px;
+      font-weight: 800;
+      padding: 2px 7px;
+      border-radius: 12px;
+      font-family: var(--font-mono);
+    }
+
+    .subtab-btn.active .subtab-badge {
+      background: rgba(255, 255, 255, 0.25);
+      color: #ffffff;
+    }
+
+    /* Card Panels */
+    .ingestion-panel-card {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.04);
+      margin-bottom: 24px;
+    }
+
+    .panel-header-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .panel-title h3 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--text-dark);
+    }
+
+    .panel-title p {
+      margin: 3px 0 0 0;
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    /* Drag & Drop File Upload Box */
+    .dropzone-upload-box {
+      border: 2px dashed #94a3b8;
+      background: #f8fafc;
+      border-radius: 10px;
+      padding: 24px 20px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .dropzone-upload-box:hover,
+    .dropzone-upload-box.dragover {
+      border-color: var(--primary-blue);
+      background: #eff6ff;
+    }
+
+    .dropzone-icon {
+      font-size: 30px;
+      margin-bottom: 6px;
+    }
+
+    .dropzone-text strong {
+      display: block;
+      font-size: 13.5px;
+      color: var(--text-dark);
+      margin-bottom: 3px;
+    }
+
+    .dropzone-text span {
+      font-size: 11.5px;
+      color: var(--text-muted);
+    }
+
+    .dropzone-upload-box input[type="file"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    /* Manual Add Bar */
+    .manual-add-form {
+      display: flex;
+      gap: 10px;
+      background: #f1f5f9;
+      padding: 12px 16px;
+      border-radius: 8px;
+      margin-bottom: 18px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .manual-input {
+      padding: 8px 12px;
+      font-size: 12px;
+      border: 1px solid var(--border-slate);
+      border-radius: 6px;
+      outline: none;
+      background: #ffffff;
+      flex: 1;
+      min-width: 140px;
+    }
+
+    .manual-input:focus {
+      border-color: var(--primary-blue);
+    }
+
+    .btn-manual-add {
+      background: var(--primary-blue);
+      color: #ffffff;
+      border: none;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.18s ease;
+      white-space: nowrap;
+    }
+
+    .btn-manual-add:hover {
+      background: var(--primary-blue-hover);
+    }
+
+    /* Data Ingestion Table Preview */
+    .ingestion-table-wrap {
+      max-height: 360px;
+      overflow-y: auto;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+    }
+
+    .ingestion-data-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11.5px;
+      background: #ffffff;
+    }
+
+    .ingestion-data-table th {
+      background: #f1f5f9;
+      color: #334155;
+      font-weight: 700;
+      text-align: left;
+      padding: 9px 12px;
+      border-bottom: 1px solid var(--border-light);
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .ingestion-data-table td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #f1f5f9;
+      color: var(--text-dark);
+      text-align: left;
+    }
+
+    .ingestion-data-table tr:hover {
+      background: #f8fafc;
+    }
+
+    .btn-row-del {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      font-weight: 700;
+      font-size: 12px;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+
+    .btn-row-del:hover {
+      background: #fee2e2;
+    }
+
+    /* Constraints & Settings Tab Layout */
+    .constraints-grid-2col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .constraint-group-box {
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 16px 20px;
+      background: #f8fafc;
+    }
+
+    .constraint-group-box h4 {
+      margin: 0 0 12px 0;
+      font-size: 13.5px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 12px;
+    }
+
+    .toggle-row:last-child {
+      border-bottom: none;
+    }
+
+    .toggle-switch {
+      position: relative;
+      display: inline-block;
+      width: 36px;
+      height: 20px;
+    }
+
+    .toggle-switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .toggle-slider {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #cbd5e1;
+      transition: .2s;
+      border-radius: 20px;
+    }
+
+    .toggle-slider:before {
+      position: absolute;
+      content: "";
+      height: 14px;
+      width: 14px;
+      left: 3px;
+      bottom: 3px;
+      background-color: white;
+      transition: .2s;
+      border-radius: 50%;
+    }
+
+    input:checked + .toggle-slider {
+      background-color: var(--primary-blue);
+    }
+
+    input:checked + .toggle-slider:before {
+      transform: translateX(16px);
+    }
+
+    .slider-row {
+      padding: 10px 0;
+      border-bottom: 1px solid #e2e8f0;
+      font-size: 12px;
+    }
+
+    .slider-row:last-child {
+      border-bottom: none;
+    }
+
+    .slider-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-weight: 600;
+    }
+
+    .slider-input {
+      width: 100%;
+      cursor: pointer;
+    }
+
+    /* Master Bottom Action Bar */
+    .ingestion-bottom-bar {
+      background: #ffffff;
+      border: 1px solid var(--border-light);
+      border-radius: 12px;
+      padding: 18px 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .summary-pills-wrap {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      font-size: 12px;
+    }
+
+    .summary-pill {
+      background: #f1f5f9;
+      padding: 5px 12px;
+      border-radius: 16px;
+      font-weight: 700;
+      color: #334155;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .summary-pill strong {
+      color: var(--primary-blue);
+      font-family: var(--font-mono);
+    }
+
+    .btn-launch-solver {
+      background: linear-gradient(135deg, var(--accent-orange) 0%, #c2410c 100%);
+      color: #ffffff;
+      border: none;
+      font-size: 14px;
+      font-weight: 800;
+      padding: 12px 28px;
+      border-radius: 8px;
+      cursor: pointer;
+      box-shadow: 0 4px 14px rgba(234, 88, 12, 0.35);
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .btn-launch-solver:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(234, 88, 12, 0.45);
+    }
+
+    /* ==========================================================================
+       STAGE 2: LIVE SOLVER EXECUTION SIMULATION MODAL
+       ========================================================================== */
+    .solver-overlay-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(4px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .solver-overlay-modal.active {
+      display: flex;
+    }
+
+    .solver-card-modal {
+      background: #ffffff;
+      border-radius: 14px;
+      max-width: 640px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .solver-modal-header {
+      background: #0f172a;
+      color: #ffffff;
+      padding: 16px 22px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .solver-modal-header h3 {
+      margin: 0;
+      font-size: 15px;
+      font-weight: 800;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .solver-modal-body {
+      padding: 24px;
+    }
+
+    .progress-bar-wrap {
+      height: 10px;
+      background: #e2e8f0;
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #ea580c);
+      width: 0%;
+      transition: width 0.25s ease;
+    }
+
+    .solver-terminal-log {
+      background: #0f172a;
+      color: #38bdf8;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      line-height: 1.6;
+      padding: 14px 18px;
+      border-radius: 8px;
+      height: 160px;
+      overflow-y: auto;
+      margin-bottom: 18px;
+      border: 1px solid #1e293b;
+    }
+
+    .terminal-line {
+      margin: 0;
+    }
+
+    .terminal-line.success {
+      color: #4ade80;
+      font-weight: 700;
+    }
+
+    .solver-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      text-align: center;
+    }
+
+    .solver-metric-box {
+      background: #f8fafc;
+      border: 1px solid var(--border-light);
+      border-radius: 8px;
+      padding: 10px;
+    }
+
+    .solver-metric-box span {
+      display: block;
+      font-size: 10px;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+
+    .solver-metric-box strong {
+      font-size: 15px;
+      font-family: var(--font-mono);
+      color: var(--text-dark);
+    }
+
+    /* ==========================================================================
+       AI WORKFLOW & ALGORITHM EXPLANATION MODAL (EXECUTIVE DESIGN V2)
+       ========================================================================== */
+    .workflow-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(15, 23, 42, 0.85);
+      backdrop-filter: blur(8px);
+      z-index: 2500;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .workflow-modal-overlay.active {
+      display: flex;
+    }
+
+    .workflow-modal-card {
+      background: #ffffff;
+      border-radius: 18px;
+      max-width: 1040px;
+      width: 100%;
+      max-height: 90vh;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.45);
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .workflow-modal-header {
+      background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+      color: #ffffff;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      flex-shrink: 0;
+    }
+
+    .workflow-modal-header h3 {
+      margin: 0;
+      font-size: 19px;
+      font-weight: 800;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      letter-spacing: -0.02em;
+    }
+
+    .workflow-modal-subtitle {
+      font-size: 12px;
+      color: #94a3b8;
+      margin-top: 4px;
+      font-weight: 400;
+    }
+
+    .btn-close-modal {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #ffffff;
+      font-size: 16px;
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+    }
+
+    .btn-close-modal:hover {
+      background: #ef4444;
+      border-color: #ef4444;
+      transform: rotate(90deg);
+    }
+
+    /* Modal Navigation Tab Bar */
+    .wf-modal-tabs-bar {
+      background: #f8fafc;
+      border-bottom: 1px solid #e2e8f0;
+      padding: 10px 24px;
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      flex-shrink: 0;
+    }
+
+    .wf-nav-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: #64748b;
+      padding: 8px 16px;
+      border-radius: 8px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+
+    .wf-nav-tab:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .wf-nav-tab.active {
+      background: #2563eb;
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.25);
+    }
+
+    .workflow-modal-content {
+      padding: 24px 28px;
+      overflow-y: auto;
+      flex-grow: 1;
+    }
+
+    .wf-tab-panel {
+      display: none;
+    }
+
+    .wf-tab-panel.active {
+      display: block;
+      animation: wfFadeIn 0.25s ease-out;
+    }
+
+    @keyframes wfFadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Visual Flow Step Breadcrumbs */
+    .wf-flow-breadcrumb {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #f1f5f9;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 12px 18px;
+      margin-bottom: 22px;
+      overflow-x: auto;
+      gap: 8px;
+    }
+
+    .wf-bc-step {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #334155;
+      white-space: nowrap;
+    }
+
+    .wf-bc-num {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #2563eb;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .wf-bc-arrow {
+      color: #94a3b8;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    /* 6-Stage Grid Cards */
+    .wf-pipeline-grid-v2 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 900px) {
+      .wf-pipeline-grid-v2 {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .wf-stage-card-v2 {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 12px;
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+      transition: all 0.25s ease;
+      position: relative;
+    }
+
+    .wf-stage-card-v2:hover {
+      border-color: #3b82f6;
+      box-shadow: 0 10px 24px -6px rgba(37, 99, 235, 0.15);
+      transform: translateY(-3px);
+    }
+
+    .wf-stage-badge-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .wf-stage-num-pill {
+      font-size: 10.5px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .wf-stage-icon-circle {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .wf-stage-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #0f172a;
+      margin: 0 0 4px 0;
+      line-height: 1.3;
+    }
+
+    .wf-stage-algo-tag {
+      font-size: 11px;
+      font-weight: 700;
+      color: #2563eb;
+      font-family: var(--font-mono);
+      margin-bottom: 10px;
+      display: block;
+    }
+
+    .wf-plain-box {
+      background: #f0fdf4;
+      border-left: 3px solid #16a34a;
+      border-radius: 6px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+      font-size: 12px;
+      color: #14532d;
+      line-height: 1.45;
+    }
+
+    .wf-plain-box strong {
+      display: block;
+      color: #15803d;
+      font-size: 11px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+      letter-spacing: 0.3px;
+    }
+
+    .wf-example-box {
+      background: #eff6ff;
+      border-left: 3px solid #3b82f6;
+      border-radius: 6px;
+      padding: 10px 12px;
+      font-size: 11.5px;
+      color: #1e40af;
+      line-height: 1.45;
+      margin-top: auto;
+    }
+
+    .wf-example-box strong {
+      display: block;
+      color: #1d4ed8;
+      font-size: 10.5px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    /* Tab 2: Core Algorithms Grid */
+    .algo-grid-v2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .algo-grid-v2 > .algo-card-v2:nth-child(5) {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 800px) {
+      .algo-grid-v2 {
+        grid-template-columns: 1fr;
+      }
+      .algo-grid-v2 > .algo-card-v2:nth-child(5) {
+        grid-column: span 1;
+      }
+    }
+
+    .algo-card-v2 {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      padding: 22px;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+      transition: all 0.2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .algo-card-v2:hover {
+      box-shadow: 0 12px 28px -6px rgba(0, 0, 0, 0.1);
+      border-color: #cbd5e1;
+    }
+
+    .algo-card-header-v2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .algo-card-header-v2 h4 {
+      margin: 0;
+      font-size: 16px;
+      font-weight: 800;
+      color: #0f172a;
+    }
+
+    .algo-syllabus-badge {
+      font-size: 10.5px;
+      font-weight: 800;
+      background: #f1f5f9;
+      color: #475569;
+      padding: 3px 8px;
+      border-radius: 4px;
+      letter-spacing: 0.5px;
+      margin-left: auto;
+    }
+
+    .algo-headline {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: #2563eb;
+      margin-bottom: 10px;
+    }
+
+    .algo-plain-text {
+      font-size: 12.5px;
+      color: #334155;
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+
+    .algo-bullets-box {
+      background: #f8fafc;
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-top: auto;
+    }
+
+    .algo-bullets-box ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .algo-bullets-box li {
+      font-size: 11.5px;
+      color: #475569;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .algo-bullets-box li:last-child {
+      margin-bottom: 0;
+    }
+
+    /* Tab 3: Hard vs Soft Rules */
+    .rules-comparison-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+    }
+
+    @media (max-width: 800px) {
+      .rules-comparison-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .rule-card-v2 {
+      border-radius: 14px;
+      padding: 24px;
+      background: #ffffff;
+      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.04);
+    }
+
+    .rule-card-hard {
+      border: 2px solid #fecaca;
+      background: linear-gradient(180deg, #fff5f5 0%, #ffffff 120px);
+    }
+
+    .rule-card-soft {
+      border: 2px solid #bbf7d0;
+      background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 120px);
+    }
+
+    .rule-header-v2 {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .rule-header-v2 h4 {
+      margin: 0;
+      font-size: 17px;
+      font-weight: 800;
+    }
+
+    .rule-item-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 14px;
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .rule-item-row:last-child {
+      margin-bottom: 0;
+    }
+
+    .rule-item-icon {
+      font-size: 16px;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* Tab 4: AI vs Manual Comparison */
+    .comparison-matrix-card {
+      background: #ffffff;
+      border: 1px solid #e2e8f0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    }
+
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    .comp-table th {
+      padding: 14px 18px;
+      font-size: 12.5px;
+      font-weight: 800;
+      border-bottom: 2px solid #e2e8f0;
+    }
+
+    .comp-table th.col-feature {
+      background: #f8fafc;
+      color: #334155;
+      width: 25%;
+    }
+
+    .comp-table th.col-manual {
+      background: #fef2f2;
+      color: #991b1b;
+      width: 37.5%;
+    }
+
+    .comp-table th.col-ai {
+      background: #eff6ff;
+      color: #1d4ed8;
+      width: 37.5%;
+    }
+
+    .comp-table td {
+      padding: 14px 18px;
+      font-size: 12px;
+      line-height: 1.45;
+      border-bottom: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comp-table tr:hover td {
+      background: #f8fafc;
+    }
+
+    /* ==========================================================================
+       STAGE 3: THE GENERATED OUTPUT TIMETABLE VIEW
+       ========================================================================== */
+    .output-top-action-bar {
+      background: #ffffff;
+      border-bottom: 2px solid var(--border-slate);
+      padding: 14px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      position: sticky;
+      top: 59px;
+      z-index: 900;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    }
+
+    .output-left-meta {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn-back-setup {
+      background: #f1f5f9;
+      color: #334155;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid var(--border-slate);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.18s ease;
+    }
+
+    .btn-back-setup:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+    }
+
+    .view-tabs-group {
+      display: inline-flex;
+      background: #f1f5f9;
+      padding: 4px;
+      border-radius: 8px;
+      border: 1px solid #e2e8f0;
+    }
+
+    .view-tab-btn {
+      background: transparent;
+      border: none;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #475569;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .view-tab-btn.active {
+      background: var(--primary-blue);
+      color: #ffffff;
+      box-shadow: 0 2px 6px rgba(30, 64, 175, 0.25);
+    }
+
+    .dropdown-select-entity {
+      padding: 7px 12px;
+      font-size: 12px;
+      border: 1px solid var(--border-slate);
+      border-radius: 6px;
+      background-color: #ffffff;
+      color: #0f172a;
+      font-weight: 600;
+      min-width: 230px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .search-input-box {
+      position: relative;
+      min-width: 210px;
+    }
+
+    .search-input-box input {
+      width: 100%;
+      padding: 7px 12px 7px 30px;
+      font-size: 12px;
+      border: 1px solid var(--border-slate);
+      border-radius: 6px;
+      outline: none;
+      background: #ffffff;
+    }
+
+    .search-input-box::before {
+      content: "🔍";
+      position: absolute;
+      left: 9px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 11px;
+      opacity: 0.6;
+    }
+
+    .output-right-actions {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-action {
+      padding: 8px 14px;
+      font-size: 11.5px;
+      font-weight: 700;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: all 0.18s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+
+    .btn-action.btn-primary {
+      background: var(--accent-orange);
+      color: #ffffff;
+    }
+
+    .btn-action.btn-primary:hover {
+      background: var(--accent-orange-hover);
+    }
+
+    .btn-action.btn-secondary {
+      background: var(--primary-blue);
+      color: #ffffff;
+    }
+
+    .btn-action.btn-secondary:hover {
+      background: var(--primary-blue-hover);
+    }
+
+    .btn-action.btn-outline {
+      background: #ffffff;
+      color: #334155;
+      border-color: var(--border-slate);
+    }
+
+    .btn-action.btn-outline:hover {
+      background: #f1f5f9;
+      color: #0f172a;
+    }
+
+    /* Timetable Render Stage */
+    .timetable-stage-wrapper {
+      max-width: 1440px;
+      margin: 20px auto 40px auto;
+      padding: 0 24px;
+    }
+
+    .timetable-paper-card {
+      background: #ffffff;
+      border: 1px solid var(--border-slate);
+      border-radius: 12px;
+      padding: 24px 30px;
+      box-shadow: 0 4px 18px rgba(15, 23, 42, 0.05);
+    }
+
+    /* Toast Notification */
+    #generator-toast {
+      visibility: hidden;
+      min-width: 250px;
+      background-color: #0f172a;
+      color: #ffffff;
+      text-align: center;
+      border-radius: 6px;
+      padding: 12px 18px;
+      position: fixed;
+      z-index: 3500;
+      left: 50%;
+      bottom: 30px;
+      transform: translateX(-50%);
+      font-size: 13px;
+      font-weight: 600;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+      border-left: 4px solid var(--success-green);
+    }
+
+    #generator-toast.show {
+      visibility: visible;
+      animation: fadein 0.3s, fadeout 0.3s 2.5s;
+    }
+
+    @keyframes fadein {
+      from { bottom: 10px; opacity: 0; }
+      to { bottom: 30px; opacity: 1; }
+    }
+
+    @keyframes fadeout {
+      from { bottom: 30px; opacity: 1; }
+      to { bottom: 10px; opacity: 0; }
+    }
+
+    /* Print Formatting */
+    @media print {
+      .studio-navbar,
+      .wizard-step-tracker,
+      .output-top-action-bar,
+      #generator-toast,
+      .workflow-modal-overlay,
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff !important;
+      }
+      .timetable-stage-wrapper {
+        margin: 0 !important;
+        padding: 0 !important;
+        max-width: 100% !important;
+      }
+      .timetable-paper-card {
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+      }
+    }
+
+    @media (max-width: 900px) {
+      .constraints-grid-2col {
+        grid-template-columns: 1fr;
+      }
+      .workflow-pipeline-flow {
+        grid-template-columns: 1fr;
+      }
+      .output-top-action-bar {
+        position: static;
+      }
+    }
+  </style>
+</head>
+<body id="top">
+
+  <!-- Top Studio Header -->
+  <header class="studio-navbar">
+    <div class="brand-left">
+      <div class="brand-logo-badge">WOXSEN AI</div>
+      <div class="brand-title-wrap">
+        <h1>AI-Based Student Timetable Generator Studio</h1>
+        <p>Foundations of Artificial Intelligence (PBL Review 1) • Intelligent Timetable Engine</p>
+      </div>
+    </div>
+    <div class="nav-actions-right">
+      <button type="button" class="btn-nav-workflow" id="btn-open-workflow-modal" title="View step-by-step algorithms and workflow">
+        📖 AI Algorithms &amp; Workflow
+      </button>
+      <a href="index.html" class="btn-nav-return">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
+        Review 1 Pitch
+      </a>
+    </div>
+  </header>
+
+  <!-- Multi-Step Wizard Navigation Tracker -->
+  <div class="wizard-step-tracker">
+    <div class="wizard-steps">
+      <div class="step-item active" id="wizard-step-1" title="Upload Resources &amp; Configure Constraints">
+        <span class="step-num">1</span>
+        <span>Data Ingestion &amp; Resources</span>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-item" id="wizard-step-2" title="Verify CSP Consistency Graph">
+        <span class="step-num">2</span>
+        <span>Constraint Solver Pipeline</span>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-item" id="wizard-step-3" title="View Generated Timetable">
+        <span class="step-num">3</span>
+        <span>Output Timetable</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       STAGE 1: STARTING PAGE (DATA INGESTION, UPLOADS & CONSTRAINTS)
+       ========================================================================== -->
+  <main class="stage-view active" id="stage-ingestion">
+    <div class="ingestion-container">
+      
+      <!-- Ingestion Hero Header -->
+      <div class="ingestion-hero-header">
+        <div class="ingestion-hero-left">
+          <h2>
+            <span>📁 Step 1: Ingest University Scheduling Resources</span>
+          </h2>
+          <p>
+            Upload or configure faculty members, student sections, campus classrooms, and course hour requirements. The AI engine constructs a multi-variable Constraint Satisfaction Problem (CSP) graph from this data to schedule all periods with zero hard conflicts.
+          </p>
+        </div>
+        <div class="preset-actions-bar">
+          <button type="button" class="btn-preset btn-preset-primary" id="btn-load-preset" title="Preload full official university dataset">
+            🚀 Load Woxsen University Preset
+          </button>
+          <button type="button" class="btn-preset btn-preset-outline" id="btn-download-templates" title="Download sample CSV files">
+            📥 Sample CSVs
+          </button>
+          <button type="button" class="btn-preset btn-preset-danger" id="btn-clear-resources" title="Reset all input data">
+            🗑️ Clear
+          </button>
+        </div>
+      </div>
+
+      <!-- Resource Navigation Sub-tabs -->
+      <div class="ingestion-subtabs-nav" role="tablist">
+        <button type="button" class="subtab-btn active" data-subtab="teachers">
+          👨‍🏫 Teachers &amp; Faculty <span class="subtab-badge" id="badge-teachers-count">120</span>
+        </button>
+        <button type="button" class="subtab-btn" data-subtab="sections">
+          👥 Student Sections <span class="subtab-badge" id="badge-sections-count">41</span>
+        </button>
+        <button type="button" class="subtab-btn" data-subtab="classrooms">
+          🏛️ Classrooms &amp; Labs <span class="subtab-badge" id="badge-rooms-count">32</span>
+        </button>
+        <button type="button" class="subtab-btn" data-subtab="courses">
+          📚 Courses &amp; Hours <span class="subtab-badge" id="badge-courses-count">18</span>
+        </button>
+        <button type="button" class="subtab-btn" data-subtab="constraints">
+          ⚙️ AI Solver &amp; Constraints <span class="subtab-badge">CSP/AC-3</span>
+        </button>
+      </div>
+
+      <!-- SUB-TAB 1: TEACHERS -->
+      <div class="ingestion-panel-card subtab-panel" id="panel-teachers">
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h3>Faculty &amp; Instructor Ingestion</h3>
+            <p>Upload a CSV file or add faculty manually. Defines the faculty domain for lecture and lab assignments.</p>
+          </div>
+        </div>
+
+        <div class="dropzone-upload-box" id="dropzone-teachers">
+          <div class="dropzone-icon">📤</div>
+          <div class="dropzone-text">
+            <strong>Drag &amp; Drop teachers.csv or click to upload</strong>
+            <span>Supported: .csv, .json (Name, Department, MaxHoursDay, Specialization)</span>
+          </div>
+          <input type="file" id="input-file-teachers" accept=".csv,.json" />
+        </div>
+
+        <!-- Manual Add Row -->
+        <div class="manual-add-form">
+          <input type="text" id="manual-teacher-name" class="manual-input" placeholder="Teacher Name (e.g. Dr. Himanshu Pandit)" />
+          <select id="manual-teacher-course" class="manual-input" style="max-width: 260px;" title="Assigned Course Subject">
+            <option value="Foundations of Artificial Intelligence and Optimization Theory">Foundations of AI (FOAIO)</option>
+            <option value="Database Management Systems Theory">Database Management (DBMS)</option>
+            <option value="Design Analysis and Algorithms Theory">Design &amp; Algorithms (DAA)</option>
+            <option value="Computer Organization and Architecture Theory">Computer Org. (COA)</option>
+            <option value="Discrete Mathematics for Computer Science Theory">Discrete Math (DMCS)</option>
+            <option value="Deep Learning Theory">Deep Learning</option>
+            <option value="Cloud Computing Theory">Cloud Computing</option>
+            <option value="Web Technologies Theory">Web Technologies</option>
+          </select>
+          <input type="text" id="manual-teacher-dept" class="manual-input" placeholder="Department (e.g. AI &amp; ML)" style="max-width: 140px;" />
+          <button type="button" id="btn-add-teacher" class="btn-manual-add">+ Add Teacher</button>
+        </div>
+
+        <!-- Data Table -->
+        <div class="ingestion-table-wrap">
+          <table class="ingestion-data-table" id="table-teachers-list">
+            <thead>
+              <tr>
+                <th style="width: 40px;">#</th>
+                <th>Faculty Name</th>
+                <th>Assigned Course</th>
+                <th>Department</th>
+                <th>Max Hours / Day</th>
+                <th>Availability Mask</th>
+                <th style="width: 60px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-teachers-list">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 2: SECTIONS -->
+      <div class="ingestion-panel-card subtab-panel" id="panel-sections" style="display: none;">
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h3>Student Sections &amp; Cohorts Ingestion</h3>
+            <p>Define section cohorts to prevent student overlap and schedule section-specific core courses.</p>
+          </div>
+        </div>
+
+        <div class="dropzone-upload-box" id="dropzone-sections">
+          <div class="dropzone-icon">👥</div>
+          <div class="dropzone-text">
+            <strong>Drag &amp; Drop sections.csv or click to upload</strong>
+            <span>Supported: .csv, .json (SectionName, Program, Year, StudentCount, BaseRoom)</span>
+          </div>
+          <input type="file" id="input-file-sections" accept=".csv,.json" />
+        </div>
+
+        <div class="manual-add-form">
+          <input type="text" id="manual-sec-name" class="manual-input" placeholder="Section Name (e.g. AIML_TIGERS_2025)" />
+          <input type="text" id="manual-sec-program" class="manual-input" placeholder="Program (e.g. B.Tech AI &amp; ML)" />
+          <input type="text" id="manual-sec-room" class="manual-input" placeholder="Base Room (e.g. Room 307 - Lab Block)" />
+          <button type="button" id="btn-add-section" class="btn-manual-add">+ Add Section</button>
+        </div>
+
+        <div class="ingestion-table-wrap">
+          <table class="ingestion-data-table" id="table-sections-list">
+            <thead>
+              <tr>
+                <th style="width: 40px;">#</th>
+                <th>Section Cohort Name</th>
+                <th>Academic Program</th>
+                <th>Base Classroom</th>
+                <th>Batch Year</th>
+                <th style="width: 60px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-sections-list">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 3: CLASSROOMS -->
+      <div class="ingestion-panel-card subtab-panel" id="panel-classrooms" style="display: none;">
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h3>Campus Classrooms &amp; Laboratories</h3>
+            <p>Map campus spaces from F-Block, C-Block, Law Block, and Lab Block with equipment capacities.</p>
+          </div>
+        </div>
+
+        <div class="dropzone-upload-box" id="dropzone-classrooms">
+          <div class="dropzone-icon">🏛️</div>
+          <div class="dropzone-text">
+            <strong>Drag &amp; Drop classrooms.csv or click to upload</strong>
+            <span>Supported: .csv, .json (RoomID, Block, Capacity, Type, Equipment)</span>
+          </div>
+          <input type="file" id="input-file-classrooms" accept=".csv,.json" />
+        </div>
+
+        <div class="manual-add-form">
+          <input type="text" id="manual-room-id" class="manual-input" placeholder="Room ID (e.g. Room 307 - Lab Block)" />
+          <input type="text" id="manual-room-type" class="manual-input" placeholder="Type (e.g. Theory / Lab)" />
+          <input type="number" id="manual-room-cap" class="manual-input" placeholder="Capacity (e.g. 75)" style="max-width: 110px;" />
+          <button type="button" id="btn-add-room" class="btn-manual-add">+ Add Classroom</button>
+        </div>
+
+        <div class="ingestion-table-wrap">
+          <table class="ingestion-data-table" id="table-classrooms-list">
+            <thead>
+              <tr>
+                <th style="width: 40px;">#</th>
+                <th>Room Designation</th>
+                <th>Campus Block</th>
+                <th>Facility Type</th>
+                <th>Seating Capacity</th>
+                <th style="width: 60px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-classrooms-list">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 4: COURSES -->
+      <div class="ingestion-panel-card subtab-panel" id="panel-courses" style="display: none;">
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h3>Curriculum Courses &amp; Contact Hours</h3>
+            <p>Configure course hours, lab sessions, and atomic 2-hour lab span requirements.</p>
+          </div>
+        </div>
+
+        <div class="dropzone-upload-box" id="dropzone-courses">
+          <div class="dropzone-icon">📚</div>
+          <div class="dropzone-text">
+            <strong>Drag &amp; Drop curriculum.csv or click to upload</strong>
+            <span>Supported: .csv, .json (CourseCode, CourseName, TheoryHours, LabHours)</span>
+          </div>
+          <input type="file" id="input-file-courses" accept=".csv,.json" />
+        </div>
+
+        <div class="manual-add-form">
+          <input type="text" id="manual-course-code" class="manual-input" placeholder="Course Code (e.g. AI201)" style="max-width: 120px;" />
+          <input type="text" id="manual-course-name" class="manual-input" placeholder="Course Title (e.g. Foundations of AI)" />
+          <input type="number" id="manual-course-th" class="manual-input" placeholder="Theory Hrs" style="max-width: 100px;" />
+          <input type="number" id="manual-course-lab" class="manual-input" placeholder="Lab Hrs" style="max-width: 100px;" />
+          <button type="button" id="btn-add-course" class="btn-manual-add">+ Add Course</button>
+        </div>
+
+        <div class="ingestion-table-wrap">
+          <table class="ingestion-data-table" id="table-courses-list">
+            <thead>
+              <tr>
+                <th style="width: 40px;">#</th>
+                <th>Course Code</th>
+                <th>Course Title</th>
+                <th>Theory Hours / Wk</th>
+                <th>Lab Hours / Wk</th>
+                <th>Continuous Block</th>
+                <th style="width: 60px;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody-courses-list">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- SUB-TAB 5: AI CONSTRAINTS & WEIGHTS -->
+      <div class="ingestion-panel-card subtab-panel" id="panel-constraints" style="display: none;">
+        <div class="panel-header-row">
+          <div class="panel-title">
+            <h3>Constraint Satisfaction (CSP) &amp; Optimization Hyperparameters</h3>
+            <p>Configure hard constraint checking and soft objective cost function weights for the solver.</p>
+          </div>
+        </div>
+
+        <div class="constraints-grid-2col">
+          <!-- Left: Hard Constraints -->
+          <div class="constraint-group-box">
+            <h4>🔴 Hard Constraints (Strict Non-Negotiable)</h4>
+            <div class="toggle-row">
+              <div>
+                <strong>Faculty Single-Assignment</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">No professor can instruct two sections simultaneously.</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked="checked" disabled="disabled" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <strong>Room Single-Occupancy</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">A classroom cannot host multiple lectures in the same period.</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked="checked" disabled="disabled" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <strong>Student Cohort Synchronization</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">A student cohort cannot be split across concurrent classes.</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked="checked" disabled="disabled" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <strong>2-Hour Atomic Lab Blocks</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">Lab sessions must span 2 consecutive hours without splitting.</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked="checked" id="chk-lab-blocks" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+            <div class="toggle-row">
+              <div>
+                <strong>Universal Lunch Break (1:00 PM - 2:00 PM)</strong>
+                <div style="font-size: 11px; color: var(--text-muted);">Mandatory institutional meal slot marked as '-x-'.</div>
+              </div>
+              <label class="toggle-switch">
+                <input type="checkbox" checked="checked" disabled="disabled" />
+                <span class="toggle-slider"></span>
+              </label>
+            </div>
+          </div>
+
+          <!-- Right: Soft Objectives -->
+          <div class="constraint-group-box">
+            <h4>🟢 Soft Objectives (Desirability Optimization)</h4>
+            
+            <div class="slider-row">
+              <div class="slider-header">
+                <span>Minimize Student Idle Gaps</span>
+                <span id="val-gap-weight">0.85</span>
+              </div>
+              <input type="range" min="0" max="1" step="0.05" value="0.85" class="slider-input" id="slider-gap-weight" />
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-header">
+                <span>Daily Workload Balance (Mon - Fri)</span>
+                <span id="val-load-weight">0.75</span>
+              </div>
+              <input type="range" min="0" max="1" step="0.05" value="0.75" class="slider-input" id="slider-load-weight" />
+            </div>
+
+            <div class="slider-row">
+              <div class="slider-header">
+                <span>Faculty Preferred Slot Match</span>
+                <span id="val-pref-weight">0.60</span>
+              </div>
+              <input type="range" min="0" max="1" step="0.05" value="0.60" class="slider-input" id="slider-pref-weight" />
+            </div>
+
+            <div style="margin-top: 14px;">
+              <strong style="font-size: 12px;">Primary AI Search Strategy:</strong>
+              <select id="select-ai-strategy" class="manual-input" style="width: 100%; margin-top: 6px;">
+                <option value="mrv-ac3">CSP Backtracking + AC-3 Arc Consistency + MRV Heuristic</option>
+                <option value="forward-lcv">Forward Checking + Least Constraining Value (LCV)</option>
+                <option value="hybrid-ga">Hybrid CSP Assignment + Genetic Algorithm Local Search</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dynamic Ingestion Modification Tracker Card -->
+      <div id="ingestion-delta-card" style="background:#eff6ff; border:1px solid #bfdbfe; border-left:4px solid #2563eb; border-radius:10px; padding:14px 20px; margin-bottom:18px; display:none;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
+          <div>
+            <strong style="color:#1e40af; font-size:13.5px; display:flex; align-items:center; gap:6px;">
+              <span>⚡</span> Real-Time Ingestion Impact Detected (Ready to Solve):
+            </strong>
+            <div style="font-size:12px; color:#1e3a8a; margin-top:4px;" id="delta-items-summary">
+              Pending modifications will re-route CSP variables upon generation.
+            </div>
+          </div>
+          <span style="font-size:11px; background:#2563eb; color:#fff; font-weight:800; padding:4px 10px; border-radius:12px; letter-spacing:0.5px;">READY FOR AI ALLOCATION</span>
+        </div>
+      </div>
+
+      <!-- Master Bottom Launch Bar -->
+      <div class="ingestion-bottom-bar">
+        <div class="summary-pills-wrap">
+          <div class="summary-pill">👨‍🏫 Teachers: <strong id="sum-teachers">120</strong></div>
+          <div class="summary-pill">👥 Sections: <strong id="sum-sections">41</strong></div>
+          <div class="summary-pill">🏛️ Rooms: <strong id="sum-rooms">32</strong></div>
+          <div class="summary-pill">📚 Courses: <strong id="sum-courses">18</strong></div>
+          <div class="summary-pill">⚡ Constraints: <strong>1,480 Binary</strong></div>
+        </div>
+        <button type="button" class="btn-launch-solver" id="btn-validate-and-generate">
+          ⚡ Validate Constraints &amp; Generate Timetable →
+        </button>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       STAGE 2: LIVE SOLVER EXECUTION SIMULATION MODAL
+       ========================================================================== -->
+  <div class="solver-overlay-modal" id="solver-modal">
+    <div class="solver-card-modal">
+      <div class="solver-modal-header">
+        <h3>⚡ Running AI Constraint Satisfaction Engine</h3>
+        <span class="subtab-badge" style="background: rgba(255,255,255,0.2);">CSP / AC-3</span>
+      </div>
+      <div class="solver-modal-body">
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="solver-progress-bar"></div>
+        </div>
+
+        <div class="solver-terminal-log" id="solver-log-console">
+          <p class="terminal-line">&gt; Initializing Woxsen University CSP variable domains...</p>
+        </div>
+
+        <div class="solver-metrics-row">
+          <div class="solver-metric-box">
+            <span>Progress</span>
+            <strong id="metric-progress-pct">0%</strong>
+          </div>
+          <div class="solver-metric-box">
+            <span>Domain Pruned</span>
+            <strong id="metric-live-pruned">0</strong>
+          </div>
+          <div class="solver-metric-box">
+            <span>Checks</span>
+            <strong id="metric-live-checks">0</strong>
+          </div>
+          <div class="solver-metric-box">
+            <span>Hard Clashes</span>
+            <strong id="metric-live-clashes" style="color: #10b981;">0</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       STAGE 3: THE GENERATED OUTPUT TIMETABLE VIEW
+       ========================================================================== -->
+  <div class="stage-view" id="stage-output">
+    
+    <!-- Top Action Bar -->
+    <div class="output-top-action-bar">
+      <div class="output-left-meta">
+        <button type="button" class="btn-back-setup" id="btn-back-to-ingestion" title="Return to Data Ingestion &amp; Resources">
+          ← Back to Resource Setup
+        </button>
+
+        <div class="view-tabs-group" role="tablist" aria-label="Timetable Category">
+          <button type="button" class="view-tab-btn active" data-category="groups" role="tab" aria-selected="true">
+            👥 Student Groups (41)
+          </button>
+          <button type="button" class="view-tab-btn" data-category="rooms" role="tab" aria-selected="false">
+            🏛️ Classrooms &amp; Labs (32)
+          </button>
+          <button type="button" class="view-tab-btn" data-category="teachers" role="tab" aria-selected="false">
+            👨‍🏫 Teachers &amp; Faculty (120)
+          </button>
+        </div>
+
+        <select id="entity-dropdown" class="dropdown-select-entity" aria-label="Select Cohort or Classroom">
+          <option value="all">★ View All Tables (Full Table of Contents)</option>
+        </select>
+
+        <div class="search-input-box">
+          <input type="text" id="search-filter-input" placeholder="Search by faculty, room, subject, or cohort..." aria-label="Live Search Timetable" />
+        </div>
+      </div>
+
+      <div class="output-right-actions">
+        <button type="button" class="btn-action btn-primary" id="btn-re-solve" title="Completely reschedule and rearrange lectures">
+          🔄 Rearrange &amp; Re-Solve
+        </button>
+        <button type="button" class="btn-action btn-outline" id="btn-simulate-conflict" title="Test Hard Constraint Conflict &amp; Resolution">
+          ⚠️ Test Clash
+        </button>
+        <button type="button" class="btn-action btn-secondary" id="btn-export-html" title="Download Clean XHTML File">
+          📥 Export Timetable (HTML)
+        </button>
+        <button type="button" class="btn-action btn-outline" id="btn-print-timetable" title="Print Landscape Timetable">
+          🖨️ Print
+        </button>
+        <button type="button" class="btn-action btn-outline" id="btn-copy-xhtml" title="Copy raw XHTML code">
+          📋 Copy XHTML
+        </button>
+      </div>
+    </div>
+
+    <!-- Main Render Stage -->
+    <main class="timetable-stage-wrapper">
+      <div class="timetable-paper-card" id="timetable-render-canvas">
+        <p style="text-align: center; color: #64748b; padding: 40px 0;">Generating Woxsen University Schedule...</p>
+      </div>
+    </main>
+  </div>
+
+  <!-- ==========================================================================
+       AI ARCHITECTURE & ALGORITHM WORKFLOW MODAL
+       ========================================================================== -->
+  <div class="workflow-modal-overlay" id="workflow-modal">
+    <div class="workflow-modal-card">
+      <div class="workflow-modal-header">
+        <div>
+          <h3>
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"></path></svg>
+            AI Scheduling Engine: How It Works &amp; Algorithms
+          </h3>
+          <div class="workflow-modal-subtitle">
+            How our AI Constraint Solver turns 1,480 campus rules into a perfect, conflict-free timetable in 44 milliseconds
+          </div>
+        </div>
+        <button type="button" class="btn-close-modal" id="btn-close-workflow" aria-label="Close Workflow Modal">✕</button>
+      </div>
+
+      <!-- Interactive Tab Bar -->
+      <div class="wf-modal-tabs-bar">
+        <button type="button" class="wf-nav-tab active" data-wftab="pipeline">
+          <span>🚀</span> 6-Stage AI Pipeline
+        </button>
+        <button type="button" class="wf-nav-tab" data-wftab="algorithms">
+          <span>🧠</span> Core AI Algorithms
+        </button>
+        <button type="button" class="wf-nav-tab" data-wftab="rules">
+          <span>⚖️</span> Hard vs. Soft Rules
+        </button>
+        <button type="button" class="wf-nav-tab" data-wftab="comparison">
+          <span>⚡</span> AI vs. Manual Scheduling
+        </button>
+      </div>
+
+      <div class="workflow-modal-content">
+        <!-- ==================================================================
+             TAB 1: 6-STAGE PIPELINE FLOW
+             ================================================================== -->
+        <div class="wf-tab-panel active" id="wf-panel-pipeline">
+          <!-- Flow Breadcrumb Tracker -->
+          <div class="wf-flow-breadcrumb">
+            <div class="wf-bc-step"><span class="wf-bc-num">1</span> Setup Pieces</div>
+            <span class="wf-bc-arrow">➔</span>
+            <div class="wf-bc-step"><span class="wf-bc-num" style="background:#059669;">2</span> AC-3 Filter</div>
+            <span class="wf-bc-arrow">➔</span>
+            <div class="wf-bc-step"><span class="wf-bc-num" style="background:#d97706;">3</span> Toughest First</div>
+            <span class="wf-bc-arrow">➔</span>
+            <div class="wf-bc-step"><span class="wf-bc-num" style="background:#7c3aed;">4</span> Friendly Room</div>
+            <span class="wf-bc-arrow">➔</span>
+            <div class="wf-bc-step"><span class="wf-bc-num" style="background:#dc2626;">5</span> Smart Recovery</div>
+            <span class="wf-bc-arrow">➔</span>
+            <div class="wf-bc-step"><span class="wf-bc-num" style="background:#0891b2;">6</span> Comfort Polish</div>
+          </div>
+
+          <!-- 6 Grid Stage Cards -->
+          <div class="wf-pipeline-grid-v2">
+            <!-- Stage 1 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#eff6ff; color:#1d4ed8;">Stage 01 • Input</span>
+                <div class="wf-stage-icon-circle" style="background:#eff6ff; color:#2563eb;">🧩</div>
+              </div>
+              <h4 class="wf-stage-title">Mapping the Puzzle Pieces</h4>
+              <span class="wf-stage-algo-tag">CSP Problem Formulation</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                Every single lecture is treated like a puzzle piece. Each piece requires three matching things at the exact same moment: an available teacher, an empty classroom, and an open student hour.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                Woxsen has 120 teachers, 41 cohorts (AIML Tigers, Rhinos, etc.), and 32 classrooms. That's over 150,000 possible combinations to organize!
+              </div>
+            </div>
+
+            <!-- Stage 2 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#ecfdf5; color:#047857;">Stage 02 • Pruning</span>
+                <div class="wf-stage-icon-circle" style="background:#ecfdf5; color:#059669;">⚡</div>
+              </div>
+              <h4 class="wf-stage-title">The Instant Rule Filter</h4>
+              <span class="wf-stage-algo-tag">Mackworth's Arc Consistency (AC-3)</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                Before guessing anything, the AI immediately crosses off all impossible combinations. If a room has only 40 seats, it's instantly eliminated for an 80-student cohort.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                If Dr. Himanshu Pandit is booked Monday at 9:00 AM, AC-3 instantly locks out Monday 9:00 AM for all his other classes across the entire university.
+              </div>
+            </div>
+
+            <!-- Stage 3 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#fffbeb; color:#b45309;">Stage 03 • Ordering</span>
+                <div class="wf-stage-icon-circle" style="background:#fffbeb; color:#d97706;">🎯</div>
+              </div>
+              <h4 class="wf-stage-title">Toughest Classes First</h4>
+              <span class="wf-stage-algo-tag">MRV (Fail-First Heuristic)</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                When solving a jigsaw puzzle, you do the corner and edge pieces first. Similarly, the AI locks in the hardest, most restricted classes before anything else.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                2-Hour continuous AI Lab blocks needing specialized GPU computers (Room 307) are locked in first before single 1-hour theory lectures take up the rooms.
+              </div>
+            </div>
+
+            <!-- Stage 4 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#f5f3ff; color:#6d28d9;">Stage 04 • Placement</span>
+                <div class="wf-stage-icon-circle" style="background:#f5f3ff; color:#7c3aed;">🤝</div>
+              </div>
+              <h4 class="wf-stage-title">The Friendly Room Picker</h4>
+              <span class="wf-stage-algo-tag">LCV (Succeed-First Heuristic)</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                When assigning a room and time, the AI picks the choice that leaves the most doors open for all other classes still waiting for a slot.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                If 10:00 AM in F-102 works for Class A and leaves 5 open rooms for Class B, but 11:00 AM leaves only 1 room, the AI chooses 10:00 AM.
+              </div>
+            </div>
+
+            <!-- Stage 5 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#fef2f2; color:#b91c1c;">Stage 05 • Search</span>
+                <div class="wf-stage-icon-circle" style="background:#fef2f2; color:#dc2626;">🔄</div>
+              </div>
+              <h4 class="wf-stage-title">Smart Recovery &amp; Backtracking</h4>
+              <span class="wf-stage-algo-tag">Constraint Backtracking with Forward Checking</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                If the AI ever hits a rare dead end where no room is free, it doesn't crash or start over. It steps back one step, changes that previous decision to the next best alternative, and moves forward.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                Mathematically guarantees 100% collision-free schedules with proven zero teacher overlaps and zero room clashes.
+              </div>
+            </div>
+
+            <!-- Stage 6 -->
+            <div class="wf-stage-card-v2">
+              <div class="wf-stage-badge-row">
+                <span class="wf-stage-num-pill" style="background:#ecfeff; color:#0e7490;">Stage 06 • Polish</span>
+                <div class="wf-stage-icon-circle" style="background:#ecfeff; color:#0891b2;">✨</div>
+              </div>
+              <h4 class="wf-stage-title">Comfort &amp; Quality Polisher</h4>
+              <span class="wf-stage-algo-tag">Soft Constraint Multi-Objective Scoring</span>
+              <div class="wf-plain-box">
+                <strong>In Plain English:</strong>
+                A timetable with no collisions is good, but a timetable that respects human life is great. The AI tweaks the timetable to eliminate long, boring waiting hours for students.
+              </div>
+              <div class="wf-example-box">
+                <strong>Campus Example:</strong>
+                Prevents painful 3-hour gaps in the student cafeteria and ensures faculty don't have 5 tiring lectures back-to-back on a single day.
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             TAB 2: 4 CORE AI ALGORITHMS
+             ================================================================== -->
+        <div class="wf-tab-panel" id="wf-panel-algorithms">
+          <div class="algo-grid-v2">
+            <!-- Algorithm 1 -->
+            <div class="algo-card-v2" style="border-top: 4px solid #2563eb;">
+              <div class="algo-card-header-v2">
+                <span style="font-size: 24px;">🧩</span>
+                <div>
+                  <h4>1. Constraint Satisfaction Problem (CSP)</h4>
+                </div>
+                <span class="algo-syllabus-badge">Unit 2 • Core AI</span>
+              </div>
+              <div class="algo-headline">"Turning Human Chaos into a Clear Logic Puzzle"</div>
+              <p class="algo-plain-text">
+                Instead of a committee spending 3 weeks guessing and checking spreadsheets, CSP converts the whole campus into mathematical variables, allowed choices, and strict rules.
+              </p>
+              <div class="algo-bullets-box">
+                <ul>
+                  <li><strong>Variables:</strong> Each lecture that needs a time and room.</li>
+                  <li><strong>Domains:</strong> The list of available rooms (e.g. F-101 to F-113) and hours (9 AM - 6 PM).</li>
+                  <li><strong>Constraints:</strong> Strict rules preventing two classes from being in the same room at the same time.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Algorithm 2 -->
+            <div class="algo-card-v2" style="border-top: 4px solid #059669;">
+              <div class="algo-card-header-v2">
+                <span style="font-size: 24px;">⚡</span>
+                <div>
+                  <h4>2. Mackworth's Arc Consistency (AC-3)</h4>
+                </div>
+                <span class="algo-syllabus-badge">Unit 2 • Pruning</span>
+              </div>
+              <div class="algo-headline">"The Smart Bouncer: Cuts Out 65% of Bad Guesses Instantly"</div>
+              <p class="algo-plain-text">
+                Imagine planning a road trip: you cross out blocked roads before driving down them. AC-3 constantly checks every pair of lectures and deletes impossible times before any searching happens.
+              </p>
+              <div class="algo-bullets-box">
+                <ul>
+                  <li><strong>Early Elimination:</strong> Deletes impossible hours before the computer even tries them.</li>
+                  <li><strong>Ripple Effect:</strong> If Room 307 is taken at 11 AM, AC-3 updates all other 40 sections immediately.</li>
+                  <li><strong>Speed Boost:</strong> Reduces solve time from hours down to just <strong>44 milliseconds</strong>.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Algorithm 3 -->
+            <div class="algo-card-v2" style="border-top: 4px solid #d97706;">
+              <div class="algo-card-header-v2">
+                <span style="font-size: 24px;">🎯</span>
+                <div>
+                  <h4>3. MRV: Minimum Remaining Values ("Fail-First")</h4>
+                </div>
+                <span class="algo-syllabus-badge">Unit 1 &amp; 2 • Variable Ordering</span>
+              </div>
+              <div class="algo-headline">"Putting the Big Rocks in the Jar First"</div>
+              <p class="algo-plain-text">
+                If you put sand in a jar first, the big rocks will never fit. The AI forces itself to schedule the hardest, most restricted classes first before single easy lectures take up all the room.
+              </p>
+              <div class="algo-bullets-box">
+                <ul>
+                  <li><strong>Corner Pieces First:</strong> Locks in continuous 2-hour AI and DBMS practical labs before single theory slots.</li>
+                  <li><strong>Fail-First Principle:</strong> Catches potential conflicts immediately when they are easiest to solve.</li>
+                  <li><strong>Dead-End Prevention:</strong> Eliminates 90% of painful timetable dead-ends.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Algorithm 4 -->
+            <div class="algo-card-v2" style="border-top: 4px solid #7c3aed;">
+              <div class="algo-card-header-v2">
+                <span style="font-size: 24px;">🤝</span>
+                <div>
+                  <h4>4. LCV: Least Constraining Value ("Succeed-First")</h4>
+                </div>
+                <span class="algo-syllabus-badge">Unit 2 • Value Ordering</span>
+              </div>
+              <div class="algo-headline">"The Considerate Roommate"</div>
+              <p class="algo-plain-text">
+                When storing food in a shared fridge, you pick the shelf that leaves room for everyone else. LCV chooses the room and time that leaves the most doors open for other classes.
+              </p>
+              <div class="algo-bullets-box">
+                <ul>
+                  <li><strong>Succeed-First:</strong> Maximizes the chance of completing the timetable on the first search pass.</li>
+                  <li><strong>Flexibility:</strong> Leaves popular rooms free for larger sections that genuinely need them.</li>
+                  <li><strong>Minimal Backtracking:</strong> Prevents cascading timetable reshuffles.</li>
+                </ul>
+              </div>
+            </div>
+
+            <!-- Algorithm 5 -->
+            <div class="algo-card-v2" style="border-top: 4px solid #0891b2;">
+              <div class="algo-card-header-v2">
+                <span style="font-size: 24px;">✨</span>
+                <div>
+                  <h4>5. Multi-Objective Soft Optimization</h4>
+                </div>
+                <span class="algo-syllabus-badge">Unit 3 • Local Optimization</span>
+              </div>
+              <div class="algo-headline">"Polishing for Human Happiness &amp; Convenience"</div>
+              <p class="algo-plain-text">
+                A timetable with zero clashes can still be terrible if students have a 4-hour gap with nothing to do. Soft optimization scores timetables on human comfort:
+              </p>
+              <div class="algo-bullets-box">
+                <ul>
+                  <li><strong>Student Gap Penalty (Weight 0.85):</strong> Keeps lectures compact so students don't wait idle in campus cafeterias.</li>
+                  <li><strong>Faculty Workload Balance (Weight 0.75):</strong> Ensures teachers don't have 6 classes on Monday and 0 on Tuesday.</li>
+                  <li><strong>Research Protection (Weight 0.60):</strong> Preserves Friday afternoons for faculty research and mentorship.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             TAB 3: HARD VS SOFT RULES
+             ================================================================== -->
+        <div class="wf-tab-panel" id="wf-panel-rules">
+          <div class="rules-comparison-grid">
+            <!-- Hard Constraints Card -->
+            <div class="rule-card-v2 rule-card-hard">
+              <div class="rule-header-v2">
+                <span style="font-size: 28px;">🔴</span>
+                <div>
+                  <h4 style="color: #991b1b;">HARD CONSTRAINTS</h4>
+                  <div style="font-size: 11.5px; color: #dc2626; font-weight: 700;">Strict Physical Laws • 100% Zero-Clash Guarantee</div>
+                </div>
+              </div>
+              <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 16px;">
+                These rules are non-negotiable. If even one hard constraint is broken, the timetable is physically impossible to execute in the real world.
+              </p>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🚫</span>
+                <div><strong>No Faculty Double-Booking:</strong> A professor cannot be in two classrooms at the exact same hour.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🚫</span>
+                <div><strong>No Room Double-Booking:</strong> A physical room (e.g. F-102) can host only one class at a time.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🚫</span>
+                <div><strong>No Student Cohort Overlap:</strong> Students in AIML Tigers cannot have two simultaneous lectures.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">⏱️</span>
+                <div><strong>Continuous 2-Hour Lab Blocks:</strong> Practical labs must occupy two consecutive periods without being split.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">📐</span>
+                <div><strong>Room Capacity Compliance:</strong> A class of 70 students must never be placed in a 40-seat classroom.</div>
+              </div>
+            </div>
+
+            <!-- Soft Constraints Card -->
+            <div class="rule-card-v2 rule-card-soft">
+              <div class="rule-header-v2">
+                <span style="font-size: 28px;">🟢</span>
+                <div>
+                  <h4 style="color: #166534;">SOFT CONSTRAINTS</h4>
+                  <div style="font-size: 11.5px; color: #16a34a; font-weight: 700;">Human Comfort &amp; Academic Convenience</div>
+                </div>
+              </div>
+              <p style="font-size: 12px; color: #14532d; margin-bottom: 16px;">
+                These rules improve quality of life. The AI scores every possible solution and continuously tweaks the schedule to maximize comfort.
+              </p>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">☕</span>
+                <div><strong>Minimal Student Idle Gaps:</strong> Prevent painful 3-hour or 4-hour gaps between morning and afternoon classes.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">⚖️</span>
+                <div><strong>Balanced Daily Load:</strong> Distribute teaching evenly across Monday–Friday (3 to 4 hours per day) rather than exhausting 7-hour marathons.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🔬</span>
+                <div><strong>Faculty Research Blocks:</strong> Protect dedicated research and PhD supervision hours (e.g., Friday 4:00 PM – 6:00 PM).</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🏛️</span>
+                <div><strong>Cohort Home Base:</strong> Keep student cohorts in their home block (C-Block or F-Block) to minimize walking between distant buildings.</div>
+              </div>
+              <div class="rule-item-row">
+                <span class="rule-item-icon">🌅</span>
+                <div><strong>Fair Distribution:</strong> Rotate early 9:00 AM slots fairly among different subjects rather than always putting one subject early.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- ==================================================================
+             TAB 4: AI VS MANUAL SCHEDULING
+             ================================================================== -->
+        <div class="wf-tab-panel" id="wf-panel-comparison">
+          <div class="comparison-matrix-card">
+            <table class="comp-table">
+              <thead>
+                <tr>
+                  <th class="col-feature">Evaluation Factor</th>
+                  <th class="col-manual">❌ Manual Spreadsheets (Old Way)</th>
+                  <th class="col-ai">✅ Woxsen AI Engine (Our Prototype)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>Time to Generate</strong></td>
+                  <td><strong>2 to 3 Weeks:</strong> Exhausting manual coordination meetings across department heads.</td>
+                  <td><strong style="color:#2563eb;">44 Milliseconds:</strong> Instant calculation powered by AC-3 and MRV heuristics.</td>
+                </tr>
+                <tr>
+                  <td><strong>Collision Guarantee</strong></td>
+                  <td><strong>Frequent Errors:</strong> Teachers and rooms get double-booked; mistakes are often found only on Day 1 of classes.</td>
+                  <td><strong style="color:#059669;">100% Mathematically Guaranteed:</strong> Arc-consistency algorithm makes hard collisions physically impossible.</td>
+                </tr>
+                <tr>
+                  <td><strong>Mid-Semester Changes</strong></td>
+                  <td><strong>Nightmare:</strong> If a teacher takes emergency leave, adjusting one class can unravel the entire semester schedule.</td>
+                  <td><strong style="color:#2563eb;">Instant 1-Click Reactivity:</strong> Simply add/remove faculty or rooms in Step 1, and the AI automatically re-allocates and repairs the schedule.</td>
+                </tr>
+                <tr>
+                  <td><strong>Student Schedule Quality</strong></td>
+                  <td><strong>Poor:</strong> Random 3 to 4 hour dead gaps where students wander around campus waiting for their next class.</td>
+                  <td><strong style="color:#059669;">Optimized Compactness:</strong> Soft objective scoring penalizes idle gaps and produces convenient schedules.</td>
+                </tr>
+                <tr>
+                  <td><strong>2-Hour Lab Scheduling</strong></td>
+                  <td><strong>Difficult:</strong> Humans struggle to fit contiguous 2-hour lab slots across limited specialized computer labs.</td>
+                  <td><strong style="color:#2563eb;">Automated Contiguity:</strong> MRV heuristic locks in continuous 2-hour spans first, satisfying all hardware requirements.</td>
+                </tr>
+                <tr>
+                  <td><strong>Multi-View Synchronization</strong></td>
+                  <td><strong>Manual Duplication:</strong> Must separately write out faculty schedules, room sheets, and student cohort timetables.</td>
+                  <td><strong style="color:#059669;">Instant Unified Views:</strong> Generates synchronized student groups, faculty, and room utilization timetables in one go.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Toast -->
+  <div id="generator-toast">Notification message</div>
+
+  <!-- Data and Engine Scripts -->
+  <script type="text/javascript" src="timetable-data.js"></script>
+  <script type="text/javascript" src="generator.js"></script>
+
+</body>
+</html>

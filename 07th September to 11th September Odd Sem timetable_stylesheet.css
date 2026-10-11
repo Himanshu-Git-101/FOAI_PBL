@@ -1,0 +1,403 @@
+/* ==========================================================================
+   Woxsen University — AI Timetable Engine Stylesheet
+   Architecture: Constraint Satisfaction Problem (CSP) + Heuristic Search
+   Odd Semester 2026 • School of Technology
+   ========================================================================== */
+
+body {
+  background-color: #f8fafc;
+  color: #1e293b;
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-size: 11.5px;
+  line-height: 1.4;
+  margin: 18px 24px;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: #0f172a;
+}
+
+/* Institutional Metadata Summary */
+table {
+  border-collapse: collapse;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+body > table:first-of-type,
+body > table:nth-of-type(2) {
+  width: auto;
+  min-width: 400px;
+  margin-bottom: 8px;
+  border: none;
+  background: transparent;
+}
+
+body > table:first-of-type th,
+body > table:first-of-type td,
+body > table:nth-of-type(2) th,
+body > table:nth-of-type(2) td {
+  border: none;
+  padding: 4px 10px 4px 0;
+  text-align: left;
+  font-size: 12px;
+}
+
+body > table:first-of-type th,
+body > table:nth-of-type(2) th {
+  color: #475569;
+  font-weight: 700;
+  width: 140px;
+}
+
+body > table:first-of-type td,
+body > table:nth-of-type(2) td {
+  color: #0f172a;
+  font-weight: 600;
+}
+
+/* Table of Contents Index */
+.studio-toc-block,
+.fet-toc-block,
+p:has(strong:contains("Table of contents")) {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 18px 22px;
+  margin-bottom: 24px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+}
+
+p strong {
+  font-size: 13px;
+  color: #0f172a;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 10px;
+}
+
+ul {
+  margin: 6px 0 14px 0;
+  padding-left: 20px;
+}
+
+li {
+  margin: 4px 0;
+  font-size: 12px;
+  color: #334155;
+}
+
+ul ul {
+  margin: 6px 0 12px 0;
+  padding-left: 18px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
+  gap: 5px 18px;
+}
+
+li a {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 600;
+  transition: all 0.15s ease;
+  display: inline-block;
+  padding: 2px 4px;
+  border-radius: 4px;
+}
+
+li a:hover {
+  color: #ea580c;
+  background-color: #fff7ed;
+}
+
+/* Original Modern Timetable Cards */
+table.odd_table,
+table.even_table {
+  border: 1px solid #cbd5e1;
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 18px;
+  margin-bottom: 14px;
+  width: 100%;
+  background-color: #ffffff;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+table.odd_table:hover,
+table.even_table:hover {
+  box-shadow: 0 4px 16px rgba(15, 23, 42, 0.08);
+}
+
+caption {
+  caption-side: top;
+  text-align: center;
+  padding: 12px 14px 10px 14px;
+  background-color: #f8fafc;
+  border: 1px solid #cbd5e1;
+  border-bottom: none;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+
+caption span.institution {
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #1e40af;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+caption span.name {
+  font-size: 16.5px;
+  font-weight: 800;
+  color: #0f172a;
+  letter-spacing: -0.01em;
+}
+
+/* Header Columns */
+th.xAxis {
+  background-color: #f1f5f9;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 11px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 4px;
+  border-bottom: 2px solid #cbd5e1;
+  border-right: 1px solid #e2e8f0;
+  white-space: nowrap;
+}
+
+th.xAxis:last-child {
+  border-right: none;
+}
+
+th.yAxis {
+  background-color: #f1f5f9;
+  color: #0f172a;
+  font-weight: 800;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 8px;
+  border-bottom: 1px solid #e2e8f0;
+  border-right: 2px solid #cbd5e1;
+  width: 95px;
+}
+
+/* Timetable Cells */
+table td {
+  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 8px 6px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 11px;
+  line-height: 1.42;
+  color: #1e293b;
+  background-color: #ffffff;
+  transition: background-color 0.2s ease;
+}
+
+table tr:hover td {
+  background-color: #f8fafc;
+}
+
+table td:last-child {
+  border-right: none;
+}
+
+/* Continuous 2-Hour Lab Block Spans */
+td[colspan="2"] {
+  background-color: #f0f7ff !important;
+  border-left: 2px solid #3b82f6 !important;
+  border-right: 2px solid #3b82f6 !important;
+  font-weight: 500;
+  position: relative;
+}
+
+td[colspan="2"]::before {
+  content: "LAB BLOCK (2 HRS)";
+  display: block;
+  font-size: 9px;
+  font-weight: 800;
+  color: #1d4ed8;
+  letter-spacing: 0.05em;
+  margin-bottom: 3px;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Empty & Lunch Break Slots */
+td:empty,
+td[data-slot="-x-"] {
+  background-color: #f8fafc;
+  color: #94a3b8;
+}
+
+/* Footnotes */
+tr.foot td {
+  background-color: #f8fafc;
+  color: #64748b;
+  font-size: 10.5px;
+  text-align: left;
+  padding: 8px 14px;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: none;
+  border-right: none;
+  font-family: 'JetBrains Mono', monospace;
+}
+
+p.back {
+  font-size: 11.5px;
+  text-align: right;
+  margin: 6px 0 28px 0;
+}
+
+p.back a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+p.back a:hover {
+  text-decoration: underline;
+  color: #ea580c;
+}
+
+/* Detailed Split Tables */
+table.detailed {
+  border: none !important;
+  margin: 0 !important;
+  width: 100% !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+td.detailed {
+  border: none !important;
+  padding: 1px 0 !important;
+  font-size: 10.5px !important;
+}
+
+/* Cell Rearrangement Flash Animation */
+@keyframes slotRearrangeAnim {
+  0% {
+    background-color: #fef08a;
+    transform: scale(0.98);
+  }
+  50% {
+    background-color: #dbeafe;
+  }
+  100% {
+    background-color: transparent;
+    transform: scale(1);
+  }
+}
+
+.slot-rearranged {
+  animation: slotRearrangeAnim 0.8s ease-out;
+}
+
+/* Prototype Dynamic Modification Badges & Banners */
+.prototype-banner {
+  box-sizing: border-box;
+  width: 100%;
+  transition: all 0.3s ease;
+}
+
+.proto-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  line-height: 1.3;
+}
+
+.faculty-new-badge {
+  display: inline-block;
+  background: #eff6ff;
+  border-left: 3px solid #2563eb;
+  padding: 3px 6px;
+  border-radius: 4px;
+  margin: 2px 0;
+  text-align: left;
+}
+
+.faculty-reallocated-badge {
+  display: inline-block;
+  background: #fff7ed;
+  border-left: 3px solid #ea580c;
+  padding: 3px 6px;
+  border-radius: 4px;
+  margin: 2px 0;
+  text-align: left;
+}
+
+.room-reallocated-badge {
+  display: inline-block;
+  background: #fef2f2;
+  border-left: 3px solid #dc2626;
+  padding: 3px 6px;
+  border-radius: 4px;
+  margin: 2px 0;
+  text-align: left;
+}
+
+.slot-new-course {
+  box-sizing: border-box;
+  text-align: left;
+  line-height: 1.4;
+  border-radius: 6px;
+  box-shadow: 0 1px 4px rgba(139, 92, 246, 0.15);
+}
+
+.slot-dropped-course {
+  box-sizing: border-box;
+  text-align: left;
+  line-height: 1.35;
+  border-radius: 5px;
+}
+
+@keyframes tableFlashAnim {
+  0% {
+    box-shadow: 0 0 0 4px #3b82f6, 0 8px 24px rgba(59, 130, 246, 0.3);
+  }
+  100% {
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  }
+}
+
+.table-highlight-flash {
+  animation: tableFlashAnim 1.8s ease-out;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    margin: 6mm;
+    background: #ffffff !important;
+    font-size: 9.5px;
+  }
+  table.odd_table,
+  table.even_table {
+    page-break-after: always;
+    box-shadow: none;
+    border: 1px solid #475569;
+  }
+  th.xAxis, th.yAxis {
+    background-color: #f1f5f9 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  td[colspan="2"] {
+    background-color: #f0f7ff !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  p.back, .no-print {
+    display: none !important;
+  }
+}

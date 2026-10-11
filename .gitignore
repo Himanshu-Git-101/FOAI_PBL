@@ -1,0 +1,26 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+
+# Scratch & test scripts
+test_pages.html
+test_pages.pdf
+test_text_render.py
+update_prelim.py
+update_report.py
+assemble_pages.py
+assemble_report_generator.py
+create_report_code.py
+generate_final_report_module.py
+generate_perfect_report.py
