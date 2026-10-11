@@ -12,12 +12,10 @@ import pypdf
 
 def get_base64_logo():
     import base64
-    logo_path = "woxsen_logo.png" if os.path.exists("woxsen_logo.png") else "woxsen_logo.jpg"
+    logo_path = "woxsen_logo.png"
     if os.path.exists(logo_path):
         with open(logo_path, "rb") as f:
-            ext = os.path.splitext(logo_path)[1].lower()
-            mime = "image/png" if ext == ".png" else "image/jpeg"
-            return f"data:{mime};base64," + base64.b64encode(f.read()).decode("utf-8")
+            return "data:image/png;base64," + base64.b64encode(f.read()).decode("utf-8")
     return ""
 
 def main():

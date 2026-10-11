@@ -24,7 +24,7 @@ def get_base64_img(path):
 
 def create_report_html(output_filepath, logo_b64=None):
     if not logo_b64:
-        logo_b64 = get_base64_img("woxsen_logo.png") if os.path.exists("woxsen_logo.png") else get_base64_img("woxsen_logo.jpg")
+        logo_b64 = get_base64_img("woxsen_logo.png")
     
     img_stage1 = get_base64_img("screenshot_stage1_resources.png")
     img_classrooms = get_base64_img("screenshot_stage1_classrooms.png")
