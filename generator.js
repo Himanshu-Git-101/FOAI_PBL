@@ -363,7 +363,7 @@
     const reader = new FileReader();
     reader.onload = (e) => {
       callback(e.target.result);
-      showToast(`Uploaded "${file.name}" successfully!`);
+      showToast(`✓ Uploaded "${file.name}" successfully!`);
     };
     reader.readAsText(file);
   }
@@ -389,7 +389,7 @@
       updateAllBadges();
       renderTeachersTable();
     } catch (err) {
-      showToast('Error: parsing teachers file.');
+      showToast('⚠ Error parsing teachers file.');
     }
   }
 
@@ -413,7 +413,7 @@
       updateAllBadges();
       renderSectionsTable();
     } catch (err) {
-      showToast('Error: parsing sections file.');
+      showToast('⚠ Error parsing sections file.');
     }
   }
 
@@ -437,7 +437,7 @@
       updateAllBadges();
       renderClassroomsTable();
     } catch (err) {
-      showToast('Error: parsing classrooms file.');
+      showToast('⚠ Error parsing classrooms file.');
     }
   }
 
@@ -462,7 +462,7 @@
       updateAllBadges();
       renderCoursesTable();
     } catch (err) {
-      showToast('Error: parsing courses file.');
+      showToast('⚠ Error parsing courses file.');
     }
   }
 
@@ -505,7 +505,7 @@
 
         updateAllBadges();
         renderTeachersTable();
-        showToast(`Ingested "${nameVal}" for ${courseVal.split(' ')[0]}! Run solver to allocate schedule.`);
+        showToast(`✓ Ingested "${nameVal}" for ${courseVal.split(' ')[0]}! Run solver to allocate schedule.`);
       });
     }
 
@@ -541,7 +541,7 @@
 
         updateAllBadges();
         renderSectionsTable();
-        showToast(`Added section "${secName}"! Complete schedule will be synthesized upon generation.`);
+        showToast(`✓ Added section "${secName}"! Complete schedule will be synthesized upon generation.`);
       });
     }
 
@@ -577,7 +577,7 @@
 
         updateAllBadges();
         renderClassroomsTable();
-        showToast(`Added classroom "${roomName}"! Lectures will be scheduled here.`);
+        showToast(`✓ Added classroom "${roomName}"! Lectures will be scheduled here.`);
       });
     }
 
@@ -615,7 +615,7 @@
 
         updateAllBadges();
         renderCoursesTable();
-        showToast(`Added curriculum course "${courseTitle}"! Slots will be scheduled in timetables.`);
+        showToast(`✓ Added curriculum course "${courseTitle}"! Slots will be scheduled in timetables.`);
       });
     }
   }
@@ -630,7 +630,7 @@
         initPresetData();
         updateAllBadges();
         renderAllIngestionTables();
-        showToast('Restored Woxsen University Benchmark Data (120 Teachers, 41 Sections, 32 Rooms)');
+        showToast('🚀 Restored Woxsen University Benchmark Data (120 Teachers, 41 Sections, 32 Rooms)');
       });
     }
 
@@ -680,7 +680,7 @@
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
-    showToast('Downloaded woxsen_faculty_sample.csv template!');
+    showToast('✓ Downloaded woxsen_faculty_sample.csv template!');
   }
 
   /* --------------------------------------------------------------------------
@@ -804,34 +804,34 @@
         deltaCard.style.display = 'block';
         let items = [];
         if (dynamicEngine.addedTeachers.length > 0) {
-          items.push(`[+] <strong>+${dynamicEngine.addedTeachers.length} Added Faculty:</strong> ${dynamicEngine.addedTeachers.map(t => `${t.name} (${t.course.replace(' Theory', '')})`).join(', ')}`);
+          items.push(`★ <strong>+${dynamicEngine.addedTeachers.length} Added Faculty:</strong> ${dynamicEngine.addedTeachers.map(t => `${t.name} (${t.course.replace(' Theory', '')})`).join(', ')}`);
         }
         if (dynamicEngine.removedTeachers.size > 0) {
           const remArr = Array.from(dynamicEngine.removedTeachers);
-          items.push(`[-] <strong>-${remArr.length} Reallocated Faculty:</strong> ${remArr.map(n => `${n} → ${dynamicEngine.substituteMap[n] || 'Peer Faculty'}`).join(', ')}`);
+          items.push(`✕ <strong>-${remArr.length} Reallocated Faculty:</strong> ${remArr.map(n => `${n} → ${dynamicEngine.substituteMap[n] || 'Peer Faculty'}`).join(', ')}`);
         }
         if (dynamicEngine.addedRooms.length > 0) {
-          items.push(`[+] <strong>+${dynamicEngine.addedRooms.length} Added Classrooms:</strong> ${dynamicEngine.addedRooms.map(r => r.name).join(', ')}`);
+          items.push(`🏛️ <strong>+${dynamicEngine.addedRooms.length} Added Classrooms:</strong> ${dynamicEngine.addedRooms.map(r => r.name).join(', ')}`);
         }
         if (dynamicEngine.removedRooms.size > 0) {
           const remRooms = Array.from(dynamicEngine.removedRooms);
-          items.push(`[-] <strong>-${remRooms.length} Reallocated Classrooms:</strong> ${remRooms.map(r => `${r} → ${dynamicEngine.roomSubstituteMap[r] || 'Alternate Hall'}`).join(', ')}`);
+          items.push(`🏛️ <strong>-${remRooms.length} Reallocated Classrooms:</strong> ${remRooms.map(r => `${r} → ${dynamicEngine.roomSubstituteMap[r] || 'Alternate Hall'}`).join(', ')}`);
         }
         if (dynamicEngine.addedSections.length > 0) {
-          items.push(`[+] <strong>+${dynamicEngine.addedSections.length} Synthesized Cohorts:</strong> ${dynamicEngine.addedSections.map(s => s.name).join(', ')}`);
+          items.push(`👥 <strong>+${dynamicEngine.addedSections.length} Synthesized Cohorts:</strong> ${dynamicEngine.addedSections.map(s => s.name).join(', ')}`);
         }
         if (dynamicEngine.removedSections.size > 0) {
           const remSecs = Array.from(dynamicEngine.removedSections);
-          items.push(`[-] <strong>-${remSecs.length} De-registered Cohorts:</strong> ${remSecs.join(', ')}`);
+          items.push(`👥 <strong>-${remSecs.length} De-registered Cohorts:</strong> ${remSecs.join(', ')}`);
         }
         if (dynamicEngine.addedCourses.length > 0) {
-          items.push(`[+] <strong>+${dynamicEngine.addedCourses.length} Added Courses:</strong> ${dynamicEngine.addedCourses.map(c => `${c.name} (${c.code})`).join(', ')}`);
+          items.push(`📚 <strong>+${dynamicEngine.addedCourses.length} Added Courses:</strong> ${dynamicEngine.addedCourses.map(c => `${c.name} (${c.code})`).join(', ')}`);
         }
         if (dynamicEngine.removedCourses.size > 0) {
           const remCourses = Array.from(dynamicEngine.removedCourses);
-          items.push(`[-] <strong>-${remCourses.length} Dropped Courses:</strong> ${remCourses.join(', ')}`);
+          items.push(`📚 <strong>-${remCourses.length} Dropped Courses:</strong> ${remCourses.join(', ')}`);
         }
-        deltaSummary.innerHTML = items.join('<br />') + '<br /><span style="color:#059669; font-weight:700; margin-top:4px; display:inline-block;"> CSP Constraint Graph will re-solve and permute periods upon generation.</span>';
+        deltaSummary.innerHTML = items.join('<br />') + '<br /><span style="color:#059669; font-weight:700; margin-top:4px; display:inline-block;">✓ CSP Constraint Graph will re-solve and permute periods upon generation.</span>';
       } else {
         deltaCard.style.display = 'none';
       }
@@ -867,8 +867,8 @@
           <td><span class="subtab-badge" style="background:#eff6ff; color:#1e40af;">${courseShort}</span></td>
           <td>${t.dept}</td>
           <td><span class="subtab-badge">${t.maxHours} hrs</span></td>
-          <td><span style="color: ${t.availability.includes('Research') ? '#ea580c' : '#10b981'}; font-weight: 600;">${t.availability}</span></td>
-          <td><button type="button" class="btn-row-del" onclick="window.deleteTeacherItem('${t.id}')">&times;</button></td>
+          <td><span style="color: ${t.availability.includes('Research') ? '#ea580c' : '#10b981'}; font-weight: 600;">● ${t.availability}</span></td>
+          <td><button type="button" class="btn-row-del" onclick="window.deleteTeacherItem('${t.id}')">✕</button></td>
         </tr>
       `;
     });
@@ -896,7 +896,7 @@
           <td>${s.program}</td>
           <td><span class="subtab-badge" style="background:#e0e7ff; color:#3730a3;">${s.room}</span></td>
           <td>${s.year}</td>
-          <td><button type="button" class="btn-row-del" onclick="window.deleteSectionItem('${s.id}')">&times;</button></td>
+          <td><button type="button" class="btn-row-del" onclick="window.deleteSectionItem('${s.id}')">✕</button></td>
         </tr>
       `;
     });
@@ -924,7 +924,7 @@
           <td>${r.block}</td>
           <td><span class="subtab-badge" style="background:${r.type.includes('Lab') ? '#fef3c7; color:#92400e;' : '#f1f5f9; color:#475569;'}">${r.type}</span></td>
           <td><strong>${r.capacity} seats</strong></td>
-          <td><button type="button" class="btn-row-del" onclick="window.deleteRoomItem('${r.id}')">&times;</button></td>
+          <td><button type="button" class="btn-row-del" onclick="window.deleteRoomItem('${r.id}')">✕</button></td>
         </tr>
       `;
     });
@@ -952,8 +952,8 @@
           <td><strong>${c.name}</strong>${customBadge}</td>
           <td>${c.theoryHours} hrs</td>
           <td>${c.labHours > 0 ? `<strong style="color:#2563eb;">${c.labHours} hrs</strong>` : '—'}</td>
-          <td>${c.labHours > 0 ? '<span style="color:#10b981; font-weight:700;">2-Hr Consecutive Block</span>' : 'Single slot'}</td>
-          <td><button type="button" class="btn-row-del" onclick="window.deleteCourseItem('${c.id}')">&times;</button></td>
+          <td>${c.labHours > 0 ? '<span style="color:#10b981; font-weight:700;">✓ 2-Hr Consecutive Block</span>' : 'Single slot'}</td>
+          <td><button type="button" class="btn-row-del" onclick="window.deleteCourseItem('${c.id}')">✕</button></td>
         </tr>
       `;
     });
@@ -976,7 +976,7 @@
     studioState.teachers = studioState.teachers.filter(t => t.id !== id);
     updateAllBadges();
     renderTeachersTable();
-    showToast(`Removed ${target?.name || 'teacher'}. Course will be reallocated by AI solver.`);
+    showToast(`✕ Removed ${target?.name || 'teacher'}. Course will be reallocated by AI solver.`);
   };
 
   window.deleteSectionItem = function (id) {
@@ -988,7 +988,7 @@
     studioState.sections = studioState.sections.filter(s => s.id !== id);
     updateAllBadges();
     renderSectionsTable();
-    showToast(`Removed section "${target?.name || ''}". Student schedule dereferenced.`);
+    showToast(`✕ Removed section "${target?.name || ''}". Student schedule dereferenced.`);
   };
 
   window.deleteRoomItem = function (id) {
@@ -1006,7 +1006,7 @@
     studioState.classrooms = studioState.classrooms.filter(r => r.id !== id);
     updateAllBadges();
     renderClassroomsTable();
-    showToast(`Removed room "${target?.name || ''}". Classes reallocated to ${dynamicEngine.roomSubstituteMap[target?.name] || 'available hall'}.`);
+    showToast(`✕ Removed room "${target?.name || ''}". Classes reallocated to ${dynamicEngine.roomSubstituteMap[target?.name] || 'available hall'}.`);
   };
 
   window.deleteCourseItem = function (id) {
@@ -1018,7 +1018,7 @@
     studioState.courses = studioState.courses.filter(c => c.id !== id);
     updateAllBadges();
     renderCoursesTable();
-    showToast(`Removed course "${target?.name || ''}". Timetable periods freed for self-study/research.`);
+    showToast(`✕ Removed course "${target?.name || ''}". Timetable periods freed for self-study/research.`);
   };
 
   /* --------------------------------------------------------------------------
@@ -1026,7 +1026,7 @@
      -------------------------------------------------------------------------- */
   function executeSolverWorkflow(isRearranging = false) {
     if (studioState.teachers.length === 0 || studioState.sections.length === 0) {
-      showToast('Notice: Please load or configure at least some faculty and sections first.');
+      showToast('⚠ Please load or configure at least some faculty and sections first.');
       return;
     }
 
@@ -1053,31 +1053,31 @@
     let customIngestLog = `&gt; Step 1: Ingested ${studioState.teachers.length} teachers, ${studioState.sections.length} sections, ${studioState.classrooms.length} rooms, ${studioState.courses.length} courses...`;
     if (dynamicEngine.addedTeachers.length > 0) {
       const topAdded = dynamicEngine.addedTeachers[0];
-      customIngestLog += `<br />&gt; [AI Engine] Detected New Faculty: Ingesting "${topAdded.name}" for ${topAdded.course.split(' ')[0]}...`;
+      customIngestLog += `<br />&gt; ⚡ Detected New Faculty: Ingesting "${topAdded.name}" for ${topAdded.course.split(' ')[0]}...`;
     }
     if (dynamicEngine.removedTeachers.size > 0) {
       const removedArr = Array.from(dynamicEngine.removedTeachers);
-      customIngestLog += `<br />&gt; [AI Engine] Detected Faculty Deletion: Re-allocating lectures from "${removedArr[0]}" to peer substitute...`;
+      customIngestLog += `<br />&gt; ⚡ Detected Faculty Deletion: Re-allocating lectures from "${removedArr[0]}" to peer substitute...`;
     }
     if (dynamicEngine.addedRooms.length > 0) {
-      customIngestLog += `<br />&gt; [Architecture] Detected New Classroom: Routing slots to "${dynamicEngine.addedRooms[0].name}"...`;
+      customIngestLog += `<br />&gt; 🏛️ Detected New Classroom: Routing slots to "${dynamicEngine.addedRooms[0].name}"...`;
     }
     if (dynamicEngine.removedRooms.size > 0) {
       const remR = Array.from(dynamicEngine.removedRooms)[0];
-      customIngestLog += `<br />&gt; [Architecture] Detected Classroom Maintenance: Re-routing slots from "${remR}" to "${dynamicEngine.roomSubstituteMap[remR] || 'Alternate Room'}"...`;
+      customIngestLog += `<br />&gt; 🏛️ Detected Classroom Maintenance: Re-routing slots from "${remR}" to "${dynamicEngine.roomSubstituteMap[remR] || 'Alternate Room'}"...`;
     }
     if (dynamicEngine.addedSections.length > 0) {
-      customIngestLog += `<br />&gt; [Student Cohort] Detected New Cohort: Synthesizing complete 5-day matrix for "${dynamicEngine.addedSections[0].name}"...`;
+      customIngestLog += `<br />&gt; 👥 Detected New Cohort: Synthesizing complete 5-day matrix for "${dynamicEngine.addedSections[0].name}"...`;
     }
     if (dynamicEngine.removedSections.size > 0) {
-      customIngestLog += `<br />&gt; [Student Cohort] Cohort De-registered: Removing timetable matrix for "${Array.from(dynamicEngine.removedSections)[0]}"...`;
+      customIngestLog += `<br />&gt; 👥 Cohort De-registered: Removing timetable matrix for "${Array.from(dynamicEngine.removedSections)[0]}"...`;
     }
     if (dynamicEngine.addedCourses.length > 0) {
       const topC = dynamicEngine.addedCourses[0];
-      customIngestLog += `<br />&gt; [Curriculum] Detected New Curriculum Course: Scheduling theory &amp; continuous lab blocks for "${topC.name}" (${topC.code})...`;
+      customIngestLog += `<br />&gt; 📚 Detected New Curriculum Course: Scheduling theory &amp; continuous lab blocks for "${topC.name}" (${topC.code})...`;
     }
     if (dynamicEngine.removedCourses.size > 0) {
-      customIngestLog += `<br />&gt; [Curriculum] Detected Dropped Course: Releasing periods for "${Array.from(dynamicEngine.removedCourses)[0]}" to student self-study / research...`;
+      customIngestLog += `<br />&gt; 📚 Detected Dropped Course: Releasing periods for "${Array.from(dynamicEngine.removedCourses)[0]}" to student self-study / research...`;
     }
 
     const steps = [
@@ -1116,7 +1116,7 @@
           modal.classList.remove('active');
           switchStage(3);
           renderOutputView(true); // Flash rearrangement
-          showToast(`Timetable completely recalculated & rearranged! (Seed #${studioState.currentSeed})`);
+          showToast(`✓ Timetable completely recalculated & rearranged! (Seed #${studioState.currentSeed})`);
         }, 320);
       }
     }, 220);
@@ -1166,13 +1166,13 @@
           // Replace matching course faculty with the new teacher's name
           const courseRegex = new RegExp(`(${cleanCourse}[^<]*<br\\s*\\/?>)([\\s\\S]*?)(<br\\s*\\/?>Room)`, 'gi');
           if (courseRegex.test(result)) {
-            result = result.replace(courseRegex, `$1<strong class="faculty-new-badge" style="color:#1d4ed8; font-weight:800; background:#dbeafe; padding:2px 7px; border-radius:4px; display:inline-block; border:1px solid #93c5fd; margin:2px 0;">${t.name} <span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; vertical-align:middle;">NEW FACULTY</span></strong>$3`);
+            result = result.replace(courseRegex, `$1<strong class="faculty-new-badge" style="color:#1d4ed8; font-weight:800; background:#dbeafe; padding:2px 7px; border-radius:4px; display:inline-block; border:1px solid #93c5fd; margin:2px 0;">★ ${t.name} <span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; vertical-align:middle;">NEW FACULTY</span></strong>$3`);
           }
         } else if (tableName.includes('AIML') || tableName.includes('CSE')) {
           // Fallback: If course not specifically found, assign them to 1 theory slot
           const slotRegex = /(<td>(?:[A-Z][a-zA-Z\s–]+(?:Theory|Lab))<br\s*\/?>)([\s\S]*?)(<br\s*\/?>Room)/i;
           if (slotRegex.test(result)) {
-            result = result.replace(slotRegex, `$1<strong class="faculty-new-badge" style="color:#1d4ed8; font-weight:800; background:#dbeafe; padding:2px 7px; border-radius:4px; display:inline-block; border:1px solid #93c5fd; margin:2px 0;">${t.name} <span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; vertical-align:middle;">NEW FACULTY</span></strong>$3`);
+            result = result.replace(slotRegex, `$1<strong class="faculty-new-badge" style="color:#1d4ed8; font-weight:800; background:#dbeafe; padding:2px 7px; border-radius:4px; display:inline-block; border:1px solid #93c5fd; margin:2px 0;">★ ${t.name} <span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; vertical-align:middle;">NEW FACULTY</span></strong>$3`);
           }
         }
       });
@@ -1241,7 +1241,7 @@
                 `<strong style="color:#1d4ed8; font-size:11px; font-weight:800;">${c.name} Lab</strong><br />` +
                 `<span style="color:#1e40af; font-weight:700; font-size:10.5px;">${facultyName}</span>` +
                 `${roomStr}<br />` +
-                `<span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; display:inline-block; margin-top:2px;">NEW CURRICULUM • 2-HR CONTINUOUS LAB</span>` +
+                `<span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; display:inline-block; margin-top:2px;">★ NEW CURRICULUM • 2-HR CONTINUOUS LAB</span>` +
               `</td>`;
             });
           }
@@ -1256,7 +1256,7 @@
               `<strong style="color:#1d4ed8; font-size:11px; font-weight:800;">${c.name} Theory</strong><br />` +
               `<span style="color:#1e40af; font-weight:700; font-size:10.5px;">${facultyName}</span><br />` +
               `<span style="color:#64748b; font-size:10px;">Course Code: ${c.code}</span><br />` +
-              `<span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; display:inline-block; margin-top:2px;">NEW CURRICULUM</span>` +
+              `<span style="background:#2563eb; color:#ffffff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800; display:inline-block; margin-top:2px;">★ NEW CURRICULUM</span>` +
             `</td>`;
           });
         }
@@ -1529,7 +1529,7 @@
     if (!selector) return;
 
     const tables = getDynamicTableList();
-    let html = '<option value="all">View All Tables (Full Table of Contents)</option>';
+    let html = '<option value="all">★ View All Tables (Full Table of Contents)</option>';
     tables.forEach(table => {
       let tag = '';
       if (dynamicEngine.addedTeachers.some(t => t.name === table.name)) {
@@ -1563,7 +1563,7 @@
           <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
             <div>
               <strong style="color:#0f172a; font-size:13.5px; display:flex; align-items:center; gap:8px;">
-                AI Timetable Working Prototype: Woxsen Baseline Active
+                <span style="font-size:16px;">⚡</span> AI Timetable Working Prototype: Woxsen Baseline Active
               </strong>
               <div style="font-size:12px; color:#64748b; margin-top:3px;">
                 CSP Engine: 1,480 constraints satisfied • 0 clashes • Seed #${studioState.currentSeed} • 
@@ -1571,7 +1571,7 @@
               </div>
             </div>
             <button type="button" class="btn-preset btn-preset-primary" onclick="document.getElementById('wizard-step-1').click()" style="font-size:12px; padding:6px 14px;">
-              Ingest / Modify Resources
+              ✏️ Ingest / Modify Resources
             </button>
           </div>
         </div>
@@ -1581,44 +1581,44 @@
     let changePills = [];
     if (hasAddedT) {
       dynamicEngine.addedTeachers.forEach(t => {
-        changePills.push(`<span class="proto-pill proto-pill-added" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">Added Faculty: <strong>${t.name}</strong> (${t.course.replace(' Theory', '')})</span>`);
+        changePills.push(`<span class="proto-pill proto-pill-added" style="background:#eff6ff; border:1px solid #bfdbfe; color:#1d4ed8; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">★ Added Faculty: <strong>${t.name}</strong> (${t.course.replace(' Theory', '')})</span>`);
       });
     }
     if (hasRemovedT) {
       dynamicEngine.removedTeachers.forEach(name => {
         const sub = dynamicEngine.substituteMap[name] || 'Peer Faculty';
-        changePills.push(`<span class="proto-pill proto-pill-removed" style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">&times; Removed Faculty: <strong>${name}</strong> → Reallocated to ${sub}</span>`);
+        changePills.push(`<span class="proto-pill proto-pill-removed" style="background:#fff7ed; border:1px solid #fed7aa; color:#c2410c; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">✕ Removed Faculty: <strong>${name}</strong> → Reallocated to ${sub}</span>`);
       });
     }
     if (hasAddedR) {
       dynamicEngine.addedRooms.forEach(r => {
-        changePills.push(`<span class="proto-pill proto-pill-room" style="background:#ecfdf5; border:1px solid #a7f3d0; color:#047857; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> Added Classroom: <strong>${r.name}</strong></span>`);
+        changePills.push(`<span class="proto-pill proto-pill-room" style="background:#ecfdf5; border:1px solid #a7f3d0; color:#047857; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">🏛️ Added Classroom: <strong>${r.name}</strong></span>`);
       });
     }
     if (hasRemovedR) {
       dynamicEngine.removedRooms.forEach(name => {
         const sub = dynamicEngine.roomSubstituteMap[name] || 'Room F-102';
-        changePills.push(`<span class="proto-pill proto-pill-room-removed" style="background:#fff7ed; border:1px solid #fdba74; color:#c2410c; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> Reallocated Classroom: <strong>${name}</strong> → ${sub}</span>`);
+        changePills.push(`<span class="proto-pill proto-pill-room-removed" style="background:#fff7ed; border:1px solid #fdba74; color:#c2410c; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">🏛️ Reallocated Classroom: <strong>${name}</strong> → ${sub}</span>`);
       });
     }
     if (hasAddedS) {
       dynamicEngine.addedSections.forEach(s => {
-        changePills.push(`<span class="proto-pill proto-pill-sec" style="background:#f5f3ff; border:1px solid #ddd6fe; color:#6d28d9; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> Synthesized Cohort: <strong>${s.name}</strong></span>`);
+        changePills.push(`<span class="proto-pill proto-pill-sec" style="background:#f5f3ff; border:1px solid #ddd6fe; color:#6d28d9; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">👥 Synthesized Cohort: <strong>${s.name}</strong></span>`);
       });
     }
     if (hasRemovedS) {
       dynamicEngine.removedSections.forEach(name => {
-        changePills.push(`<span class="proto-pill proto-pill-sec-removed" style="background:#f8fafc; border:1px solid #cbd5e1; color:#64748b; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> De-registered Cohort: <strong>${name}</strong></span>`);
+        changePills.push(`<span class="proto-pill proto-pill-sec-removed" style="background:#f8fafc; border:1px solid #cbd5e1; color:#64748b; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">👥 De-registered Cohort: <strong>${name}</strong></span>`);
       });
     }
     if (hasAddedC) {
       dynamicEngine.addedCourses.forEach(c => {
-        changePills.push(`<span class="proto-pill proto-pill-course" style="background:#eff6ff; border:1px solid #93c5fd; color:#1d4ed8; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> Added Curriculum Course: <strong>${c.name}</strong> (${c.code})</span>`);
+        changePills.push(`<span class="proto-pill proto-pill-course" style="background:#eff6ff; border:1px solid #93c5fd; color:#1d4ed8; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">📚 Added Curriculum Course: <strong>${c.name}</strong> (${c.code})</span>`);
       });
     }
     if (hasRemovedC) {
       dynamicEngine.removedCourses.forEach(name => {
-        changePills.push(`<span class="proto-pill proto-pill-course-removed" style="background:#fef2f2; border:1px solid #fca5a5; color:#991b1b; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;"> Dropped Course: <strong>${name}</strong> (Periods Freed)</span>`);
+        changePills.push(`<span class="proto-pill proto-pill-course-removed" style="background:#fef2f2; border:1px solid #fca5a5; color:#991b1b; padding:3px 9px; border-radius:6px; font-size:11.5px; font-weight:700;">📚 Dropped Course: <strong>${name}</strong> (Periods Freed)</span>`);
       });
     }
 
@@ -1639,10 +1639,10 @@
           </div>
           <div style="display:flex; gap:8px;">
             <button type="button" class="btn-action btn-primary" onclick="window.triggerReSolveFromBanner()" style="font-size:12px; padding:7px 14px;">
-              Rearrange &amp; Re-Solve
+              🔄 Rearrange &amp; Re-Solve
             </button>
             <button type="button" class="btn-action btn-outline" onclick="document.getElementById('wizard-step-1').click()" style="font-size:12px; padding:7px 14px; background:#fff;">
-              Ingest More
+              ✏️ Ingest More
             </button>
           </div>
         </div>
@@ -1703,11 +1703,11 @@
       filteredTables.forEach(t => {
         let tag = '';
         if (dynamicEngine.addedTeachers.some(item => item.name === t.name)) {
-          tag = ' <span style="background:#2563eb; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">NEW FACULTY</span>';
+          tag = ' <span style="background:#2563eb; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">★ NEW FACULTY</span>';
         } else if (dynamicEngine.addedSections.some(item => item.name === t.name)) {
-          tag = ' <span style="background:#7c3aed; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">NEW SECTION</span>';
+          tag = ' <span style="background:#7c3aed; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">★ NEW SECTION</span>';
         } else if (dynamicEngine.addedRooms.some(item => item.name === t.name)) {
-          tag = ' <span style="background:#059669; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">NEW ROOM</span>';
+          tag = ' <span style="background:#059669; color:#fff; font-size:9px; padding:1px 5px; border-radius:3px; font-weight:800;">★ NEW ROOM</span>';
         }
         dynamicToc += `<li><a href="#${t.id}">${t.name}</a>${tag}</li>`;
       });
@@ -1746,7 +1746,7 @@
       if (studioState.conflictInjected && t.name.includes('AIML_RHINOS_2025')) {
         tbodyContent = tbodyContent.replace(
           '<td>Computer Organization and Architecture Theory',
-          '<td class="simulated-conflict-slot" style="background:#fee2e2; border: 2px solid #ef4444 !important;"> <strong>HARD CONFLICT:</strong> Dr. Malli double-booked!<br />Computer Organization and Architecture Theory'
+          '<td class="simulated-conflict-slot" style="background:#fee2e2; border: 2px solid #ef4444 !important;">⚠ <strong>HARD CONFLICT:</strong> Dr. Malli double-booked!<br />Computer Organization and Architecture Theory'
         );
       }
 
@@ -1803,11 +1803,11 @@
     const btn = document.getElementById('btn-simulate-conflict');
 
     if (studioState.conflictInjected) {
-      if (btn) btn.innerHTML = `Resolve Clashes with AI CSP`;
-      showToast('Conflict Injected: Sample faculty clash in AIML_RHINOS_2025!');
+      if (btn) btn.innerHTML = `🔧 Resolve Clashes with AI CSP`;
+      showToast('⚠ Injected sample faculty clash in AIML_RHINOS_2025!');
       renderOutputView();
     } else {
-      if (btn) btn.innerHTML = `Test Clash`;
+      if (btn) btn.innerHTML = `⚠️ Test Clash`;
       executeSolverWorkflow(true); // Triggers full rearrangement and resolves clash!
     }
   }
@@ -1912,7 +1912,7 @@
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
 
-    showToast(`Exported Woxsen ${catName} Timetable HTML!`);
+    showToast(`✓ Exported Woxsen ${catName} Timetable HTML!`);
   }
 
   function copyXhtmlToClipboard() {
@@ -1921,9 +1921,9 @@
 
     const html = canvas.innerHTML;
     navigator.clipboard.writeText(html).then(() => {
-      showToast('Timetable XHTML markup copied to clipboard!');
+      showToast('✓ Timetable XHTML markup copied to clipboard!');
     }).catch(() => {
-      showToast('Notice: Clipboard access denied');
+      showToast('⚠ Clipboard access denied');
     });
   }
 
