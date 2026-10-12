@@ -204,13 +204,13 @@ function initEmbeddedGenerator() {
 
   if (btn) {
     btn.addEventListener('click', () => {
-      btn.textContent = '⏳ Solving CSP...';
+      btn.textContent = 'Solving CSP Engine...';
       btn.disabled = true;
       setTimeout(() => {
-        btn.textContent = '✓ 100% Constraints Satisfied';
+        btn.textContent = '100% Constraints Satisfied';
         renderEmbeddedTable(select ? select.value : 'table_10');
         setTimeout(() => {
-          btn.textContent = '⚡ Run AI Generator';
+          btn.textContent = 'Run AI Generator';
           btn.disabled = false;
         }, 1500);
       }, 350);

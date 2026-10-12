@@ -10,7 +10,7 @@
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="crossorigin" />
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Sansation:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" />
 
   <!-- Modern Timetable Stylesheet -->
   <link rel="stylesheet" media="all" href="07th September to 11th September Odd Sem timetable_stylesheet.css" type="text/css" />
@@ -19,18 +19,42 @@
     /* ==========================================================================
        AI TIMETABLE GENERATOR STUDIO — STYLES
        ========================================================================== */
+    /* Fixed Campus Background & Overlay */
+    .campus-bg-fixed {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background-image: url('campus_bg.jpg');
+      background-position: center center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      pointer-events: none;
+    }
+    .campus-bg-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      background: radial-gradient(ellipse at 50% 25%, rgba(4, 8, 15, 0.68) 0%, rgba(4, 8, 15, 0.92) 100%);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      pointer-events: none;
+    }
+
     :root {
-      --primary-blue: #1e40af;
-      --primary-blue-hover: #1d4ed8;
-      --accent-orange: #ea580c;
-      --accent-orange-hover: #c2410c;
-      --bg-slate: #f8fafc;
-      --border-slate: #cbd5e1;
-      --border-light: #e2e8f0;
-      --text-dark: #0f172a;
-      --text-muted: #64748b;
-      --success-green: #10b981;
+      --primary-blue: #38BDF8;
+      --primary-blue-hover: #0EA5E9;
+      --accent-orange: #DA5662;
+      --accent-orange-hover: #E26D78;
+      --bg-slate: #04080F;
+      --border-slate: rgba(255, 255, 255, 0.15);
+      --border-light: rgba(255, 255, 255, 0.10);
+      --text-dark: #FFFFFF;
+      --text-muted: #94A3B8;
+      --success-green: #34D399;
       --font-mono: 'JetBrains Mono', monospace;
+      --card-bg: rgba(12, 17, 24, 0.72);
+      --card-border: rgba(255, 255, 255, 0.12);
     }
 
     * {
@@ -40,20 +64,24 @@
     body {
       margin: 0;
       padding: 0;
-      background-color: var(--bg-slate);
-      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
-      color: var(--text-dark);
+      background-color: transparent;
+      font-family: 'Sansation', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      color: #FFFFFF;
+      min-height: 100vh;
     }
 
     /* Top Studio Header */
     .studio-navbar {
-      background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+      background: rgba(8, 14, 22, 0.85);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
       color: #ffffff;
       padding: 14px 28px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 4px 14px rgba(15, 23, 42, 0.15);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
       position: sticky;
       top: 0;
       z-index: 1000;
@@ -138,13 +166,14 @@
 
     /* Workflow Step Navigation */
     .wizard-step-tracker {
-      background: #ffffff;
-      border-bottom: 1px solid var(--border-light);
+      background: rgba(12, 17, 24, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.10);
       padding: 12px 28px;
       display: flex;
       justify-content: center;
       align-items: center;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     }
 
     .wizard-steps {
@@ -321,19 +350,29 @@
     }
 
     .subtab-btn {
-      background: #ffffff;
-      border: 1px solid var(--border-light);
-      border-radius: 8px;
       padding: 10px 18px;
       font-size: 13px;
       font-weight: 700;
-      color: #475569;
+      color: #CBD5E1;
+      border: 1px solid rgba(255, 255, 255, 0.10);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 8px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.18s ease;
-      white-space: nowrap;
+      transition: all 0.2s ease;
+    }
+    .subtab-btn:hover {
+      background: rgba(255, 255, 255, 0.08);
+      color: #FFFFFF;
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+    .subtab-btn.active {
+      background: rgba(218, 86, 98, 0.2);
+      border-color: #DA5662;
+      color: #FFFFFF;
+      box-shadow: 0 4px 16px rgba(218, 86, 98, 0.3);
     }
 
     .subtab-btn:hover {
@@ -663,11 +702,14 @@
     }
 
     .summary-pill {
-      background: #f1f5f9;
-      padding: 5px 12px;
-      border-radius: 16px;
-      font-weight: 700;
-      color: #334155;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #E2E8F0;
+      padding: 6px 14px;
+      border-radius: 20px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
@@ -1437,7 +1479,7 @@
     }
 
     .search-input-box::before {
-      content: "🔍";
+      content: "";
       position: absolute;
       left: 9px;
       top: 50%;
@@ -1597,7 +1639,7 @@
     </div>
     <div class="nav-actions-right">
       <button type="button" class="btn-nav-workflow" id="btn-open-workflow-modal" title="View step-by-step algorithms and workflow">
-        📖 AI Algorithms &amp; Workflow
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg>AI Algorithms &amp; Workflow
       </button>
       <a href="index.html" class="btn-nav-return">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
@@ -1636,7 +1678,7 @@
       <div class="ingestion-hero-header">
         <div class="ingestion-hero-left">
           <h2>
-            <span>📁 Step 1: Ingest University Scheduling Resources</span>
+            <span>Step 1: Ingest University Scheduling Resources</span>
           </h2>
           <p>
             Upload or configure faculty members, student sections, campus classrooms, and course hour requirements. The AI engine constructs a multi-variable Constraint Satisfaction Problem (CSP) graph from this data to schedule all periods with zero hard conflicts.
@@ -1644,13 +1686,13 @@
         </div>
         <div class="preset-actions-bar">
           <button type="button" class="btn-preset btn-preset-primary" id="btn-load-preset" title="Preload full official university dataset">
-            🚀 Load Woxsen University Preset
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>Load Woxsen University Preset
           </button>
           <button type="button" class="btn-preset btn-preset-outline" id="btn-download-templates" title="Download sample CSV files">
-            📥 Sample CSVs
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Sample CSVs
           </button>
           <button type="button" class="btn-preset btn-preset-danger" id="btn-clear-resources" title="Reset all input data">
-            🗑️ Clear
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>Clear
           </button>
         </div>
       </div>
@@ -1658,19 +1700,19 @@
       <!-- Resource Navigation Sub-tabs -->
       <div class="ingestion-subtabs-nav" role="tablist">
         <button type="button" class="subtab-btn active" data-subtab="teachers">
-          👨‍🏫 Teachers &amp; Faculty <span class="subtab-badge" id="badge-teachers-count">120</span>
+          Teachers &amp; Faculty <span class="subtab-badge" id="badge-teachers-count">120</span>
         </button>
         <button type="button" class="subtab-btn" data-subtab="sections">
-          👥 Student Sections <span class="subtab-badge" id="badge-sections-count">41</span>
+          Student Sections <span class="subtab-badge" id="badge-sections-count">41</span>
         </button>
         <button type="button" class="subtab-btn" data-subtab="classrooms">
-          🏛️ Classrooms &amp; Labs <span class="subtab-badge" id="badge-rooms-count">32</span>
+          Classrooms &amp; Labs <span class="subtab-badge" id="badge-rooms-count">32</span>
         </button>
         <button type="button" class="subtab-btn" data-subtab="courses">
-          📚 Courses &amp; Hours <span class="subtab-badge" id="badge-courses-count">18</span>
+          Courses &amp; Hours <span class="subtab-badge" id="badge-courses-count">18</span>
         </button>
         <button type="button" class="subtab-btn" data-subtab="constraints">
-          ⚙️ AI Solver &amp; Constraints <span class="subtab-badge">CSP/AC-3</span>
+          AI Solver &amp; Constraints <span class="subtab-badge">CSP/AC-3</span>
         </button>
       </div>
 
@@ -1684,7 +1726,7 @@
         </div>
 
         <div class="dropzone-upload-box" id="dropzone-teachers">
-          <div class="dropzone-icon">📤</div>
+          <div class="dropzone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
           <div class="dropzone-text">
             <strong>Drag &amp; Drop teachers.csv or click to upload</strong>
             <span>Supported: .csv, .json (Name, Department, MaxHoursDay, Specialization)</span>
@@ -1740,7 +1782,7 @@
         </div>
 
         <div class="dropzone-upload-box" id="dropzone-sections">
-          <div class="dropzone-icon">👥</div>
+          <div class="dropzone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
           <div class="dropzone-text">
             <strong>Drag &amp; Drop sections.csv or click to upload</strong>
             <span>Supported: .csv, .json (SectionName, Program, Year, StudentCount, BaseRoom)</span>
@@ -1784,7 +1826,7 @@
         </div>
 
         <div class="dropzone-upload-box" id="dropzone-classrooms">
-          <div class="dropzone-icon">🏛️</div>
+          <div class="dropzone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"></line><line x1="4" y1="10" x2="20" y2="10"></line><polygon points="12 2 20 7 4 7 12 2"></polygon><line x1="6" y1="10" x2="6" y2="21"></line><line x1="10" y1="10" x2="10" y2="21"></line><line x1="14" y1="10" x2="14" y2="21"></line><line x1="18" y1="10" x2="18" y2="21"></line></svg></div>
           <div class="dropzone-text">
             <strong>Drag &amp; Drop classrooms.csv or click to upload</strong>
             <span>Supported: .csv, .json (RoomID, Block, Capacity, Type, Equipment)</span>
@@ -1828,7 +1870,7 @@
         </div>
 
         <div class="dropzone-upload-box" id="dropzone-courses">
-          <div class="dropzone-icon">📚</div>
+          <div class="dropzone-icon"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg></div>
           <div class="dropzone-text">
             <strong>Drag &amp; Drop curriculum.csv or click to upload</strong>
             <span>Supported: .csv, .json (CourseCode, CourseName, TheoryHours, LabHours)</span>
@@ -1876,7 +1918,7 @@
         <div class="constraints-grid-2col">
           <!-- Left: Hard Constraints -->
           <div class="constraint-group-box">
-            <h4>🔴 Hard Constraints (Strict Non-Negotiable)</h4>
+            <h4>Hard Constraints (Strict Non-Negotiable)</h4>
             <div class="toggle-row">
               <div>
                 <strong>Faculty Single-Assignment</strong>
@@ -1931,7 +1973,7 @@
 
           <!-- Right: Soft Objectives -->
           <div class="constraint-group-box">
-            <h4>🟢 Soft Objectives (Desirability Optimization)</h4>
+            <h4>Soft Objectives (Desirability Optimization)</h4>
             
             <div class="slider-row">
               <div class="slider-header">
@@ -1974,7 +2016,7 @@
         <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:10px;">
           <div>
             <strong style="color:#1e40af; font-size:13.5px; display:flex; align-items:center; gap:6px;">
-              <span>⚡</span> Real-Time Ingestion Impact Detected (Ready to Solve):
+              <span><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span> Real-Time Ingestion Impact Detected (Ready to Solve):
             </strong>
             <div style="font-size:12px; color:#1e3a8a; margin-top:4px;" id="delta-items-summary">
               Pending modifications will re-route CSP variables upon generation.
@@ -1987,14 +2029,14 @@
       <!-- Master Bottom Launch Bar -->
       <div class="ingestion-bottom-bar">
         <div class="summary-pills-wrap">
-          <div class="summary-pill">👨‍🏫 Teachers: <strong id="sum-teachers">120</strong></div>
-          <div class="summary-pill">👥 Sections: <strong id="sum-sections">41</strong></div>
-          <div class="summary-pill">🏛️ Rooms: <strong id="sum-rooms">32</strong></div>
-          <div class="summary-pill">📚 Courses: <strong id="sum-courses">18</strong></div>
-          <div class="summary-pill">⚡ Constraints: <strong>1,480 Binary</strong></div>
+          <div class="summary-pill">Teachers: <strong id="sum-teachers">120</strong></div>
+          <div class="summary-pill">Sections: <strong id="sum-sections">41</strong></div>
+          <div class="summary-pill">Rooms: <strong id="sum-rooms">32</strong></div>
+          <div class="summary-pill">Courses: <strong id="sum-courses">18</strong></div>
+          <div class="summary-pill">Constraints: <strong>1,480 Binary</strong></div>
         </div>
         <button type="button" class="btn-launch-solver" id="btn-validate-and-generate">
-          ⚡ Validate Constraints &amp; Generate Timetable →
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg>Validate Constraints &amp; Generate Timetable →
         </button>
       </div>
 
@@ -2007,7 +2049,7 @@
   <div class="solver-overlay-modal" id="solver-modal">
     <div class="solver-card-modal">
       <div class="solver-modal-header">
-        <h3>⚡ Running AI Constraint Satisfaction Engine</h3>
+        <h3>Running AI Constraint Satisfaction Engine</h3>
         <span class="subtab-badge" style="background: rgba(255,255,255,0.2);">CSP / AC-3</span>
       </div>
       <div class="solver-modal-body">
@@ -2055,18 +2097,18 @@
 
         <div class="view-tabs-group" role="tablist" aria-label="Timetable Category">
           <button type="button" class="view-tab-btn active" data-category="groups" role="tab" aria-selected="true">
-            👥 Student Groups (41)
+            Student Groups (41)
           </button>
           <button type="button" class="view-tab-btn" data-category="rooms" role="tab" aria-selected="false">
-            🏛️ Classrooms &amp; Labs (32)
+            Classrooms &amp; Labs (32)
           </button>
           <button type="button" class="view-tab-btn" data-category="teachers" role="tab" aria-selected="false">
-            👨‍🏫 Teachers &amp; Faculty (120)
+            Teachers &amp; Faculty (120)
           </button>
         </div>
 
         <select id="entity-dropdown" class="dropdown-select-entity" aria-label="Select Cohort or Classroom">
-          <option value="all">★ View All Tables (Full Table of Contents)</option>
+          <option value="all">View All Tables (Full Table of Contents)</option>
         </select>
 
         <div class="search-input-box">
@@ -2076,19 +2118,19 @@
 
       <div class="output-right-actions">
         <button type="button" class="btn-action btn-primary" id="btn-re-solve" title="Completely reschedule and rearrange lectures">
-          🔄 Rearrange &amp; Re-Solve
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>Rearrange &amp; Re-Solve
         </button>
         <button type="button" class="btn-action btn-outline" id="btn-simulate-conflict" title="Test Hard Constraint Conflict &amp; Resolution">
-          ⚠️ Test Clash
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>Test Clash
         </button>
         <button type="button" class="btn-action btn-secondary" id="btn-export-html" title="Download Clean XHTML File">
-          📥 Export Timetable (HTML)
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>Export Timetable (HTML)
         </button>
         <button type="button" class="btn-action btn-outline" id="btn-print-timetable" title="Print Landscape Timetable">
-          🖨️ Print
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polyline points="6 9 6 2 18 2 18 9"></polyline><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"></path><rect x="6" y="14" width="12" height="8"></rect></svg>Print
         </button>
         <button type="button" class="btn-action btn-outline" id="btn-copy-xhtml" title="Copy raw XHTML code">
-          📋 Copy XHTML
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>Copy XHTML
         </button>
       </div>
     </div>
@@ -2116,22 +2158,22 @@
             How our AI Constraint Solver turns 1,480 campus rules into a perfect, conflict-free timetable in 44 milliseconds
           </div>
         </div>
-        <button type="button" class="btn-close-modal" id="btn-close-workflow" aria-label="Close Workflow Modal">✕</button>
+        <button type="button" class="btn-close-modal" id="btn-close-workflow" aria-label="Close Workflow Modal">&times;</button>
       </div>
 
       <!-- Interactive Tab Bar -->
       <div class="wf-modal-tabs-bar">
         <button type="button" class="wf-nav-tab active" data-wftab="pipeline">
-          <span>🚀</span> 6-Stage AI Pipeline
+          6-Stage AI Pipeline
         </button>
         <button type="button" class="wf-nav-tab" data-wftab="algorithms">
-          <span>🧠</span> Core AI Algorithms
+          Core AI Algorithms
         </button>
         <button type="button" class="wf-nav-tab" data-wftab="rules">
-          <span>⚖️</span> Hard vs. Soft Rules
+          Hard vs. Soft Rules
         </button>
         <button type="button" class="wf-nav-tab" data-wftab="comparison">
-          <span>⚡</span> AI vs. Manual Scheduling
+          AI vs. Manual Scheduling
         </button>
       </div>
 
@@ -2143,15 +2185,15 @@
           <!-- Flow Breadcrumb Tracker -->
           <div class="wf-flow-breadcrumb">
             <div class="wf-bc-step"><span class="wf-bc-num">1</span> Setup Pieces</div>
-            <span class="wf-bc-arrow">➔</span>
+            <span class="wf-bc-arrow">→</span>
             <div class="wf-bc-step"><span class="wf-bc-num" style="background:#059669;">2</span> AC-3 Filter</div>
-            <span class="wf-bc-arrow">➔</span>
+            <span class="wf-bc-arrow">→</span>
             <div class="wf-bc-step"><span class="wf-bc-num" style="background:#d97706;">3</span> Toughest First</div>
-            <span class="wf-bc-arrow">➔</span>
+            <span class="wf-bc-arrow">→</span>
             <div class="wf-bc-step"><span class="wf-bc-num" style="background:#7c3aed;">4</span> Friendly Room</div>
-            <span class="wf-bc-arrow">➔</span>
+            <span class="wf-bc-arrow">→</span>
             <div class="wf-bc-step"><span class="wf-bc-num" style="background:#dc2626;">5</span> Smart Recovery</div>
-            <span class="wf-bc-arrow">➔</span>
+            <span class="wf-bc-arrow">→</span>
             <div class="wf-bc-step"><span class="wf-bc-num" style="background:#0891b2;">6</span> Comfort Polish</div>
           </div>
 
@@ -2161,7 +2203,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#eff6ff; color:#1d4ed8;">Stage 01 • Input</span>
-                <div class="wf-stage-icon-circle" style="background:#eff6ff; color:#2563eb;">🧩</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(56,189,248,0.12); color:#38BDF8;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></div>
               </div>
               <h4 class="wf-stage-title">Mapping the Puzzle Pieces</h4>
               <span class="wf-stage-algo-tag">CSP Problem Formulation</span>
@@ -2179,7 +2221,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#ecfdf5; color:#047857;">Stage 02 • Pruning</span>
-                <div class="wf-stage-icon-circle" style="background:#ecfdf5; color:#059669;">⚡</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(16,185,129,0.12); color:#10B981;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></div>
               </div>
               <h4 class="wf-stage-title">The Instant Rule Filter</h4>
               <span class="wf-stage-algo-tag">Mackworth's Arc Consistency (AC-3)</span>
@@ -2197,7 +2239,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#fffbeb; color:#b45309;">Stage 03 • Ordering</span>
-                <div class="wf-stage-icon-circle" style="background:#fffbeb; color:#d97706;">🎯</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(245,158,11,0.12); color:#F59E0B;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></div>
               </div>
               <h4 class="wf-stage-title">Toughest Classes First</h4>
               <span class="wf-stage-algo-tag">MRV (Fail-First Heuristic)</span>
@@ -2215,7 +2257,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#f5f3ff; color:#6d28d9;">Stage 04 • Placement</span>
-                <div class="wf-stage-icon-circle" style="background:#f5f3ff; color:#7c3aed;">🤝</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(139,92,246,0.12); color:#A78BFA;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></div>
               </div>
               <h4 class="wf-stage-title">The Friendly Room Picker</h4>
               <span class="wf-stage-algo-tag">LCV (Succeed-First Heuristic)</span>
@@ -2233,7 +2275,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#fef2f2; color:#b91c1c;">Stage 05 • Search</span>
-                <div class="wf-stage-icon-circle" style="background:#fef2f2; color:#dc2626;">🔄</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(218,86,98,0.12); color:#DA5662;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg></div>
               </div>
               <h4 class="wf-stage-title">Smart Recovery &amp; Backtracking</h4>
               <span class="wf-stage-algo-tag">Constraint Backtracking with Forward Checking</span>
@@ -2251,7 +2293,7 @@
             <div class="wf-stage-card-v2">
               <div class="wf-stage-badge-row">
                 <span class="wf-stage-num-pill" style="background:#ecfeff; color:#0e7490;">Stage 06 • Polish</span>
-                <div class="wf-stage-icon-circle" style="background:#ecfeff; color:#0891b2;">✨</div>
+                <div class="wf-stage-icon-circle" style="background:rgba(6,182,212,0.12); color:#22D3EE;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg></div>
               </div>
               <h4 class="wf-stage-title">Comfort &amp; Quality Polisher</h4>
               <span class="wf-stage-algo-tag">Soft Constraint Multi-Objective Scoring</span>
@@ -2275,7 +2317,7 @@
             <!-- Algorithm 1 -->
             <div class="algo-card-v2" style="border-top: 4px solid #2563eb;">
               <div class="algo-card-header-v2">
-                <span style="font-size: 24px;">🧩</span>
+                <span style="display:inline-flex;color:#38BDF8;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg></span>
                 <div>
                   <h4>1. Constraint Satisfaction Problem (CSP)</h4>
                 </div>
@@ -2297,7 +2339,7 @@
             <!-- Algorithm 2 -->
             <div class="algo-card-v2" style="border-top: 4px solid #059669;">
               <div class="algo-card-header-v2">
-                <span style="font-size: 24px;">⚡</span>
+                <span style="display:inline-flex;color:#10B981;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg></span>
                 <div>
                   <h4>2. Mackworth's Arc Consistency (AC-3)</h4>
                 </div>
@@ -2319,7 +2361,7 @@
             <!-- Algorithm 3 -->
             <div class="algo-card-v2" style="border-top: 4px solid #d97706;">
               <div class="algo-card-header-v2">
-                <span style="font-size: 24px;">🎯</span>
+                <span style="display:inline-flex;color:#F59E0B;"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:middle;margin-right:4px;"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg></span>
                 <div>
                   <h4>3. MRV: Minimum Remaining Values ("Fail-First")</h4>
                 </div>
@@ -2341,7 +2383,7 @@
             <!-- Algorithm 4 -->
             <div class="algo-card-v2" style="border-top: 4px solid #7c3aed;">
               <div class="algo-card-header-v2">
-                <span style="font-size: 24px;">🤝</span>
+                <span style="display:inline-flex;color:#A78BFA;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#38BDF8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg></span>
                 <div>
                   <h4>4. LCV: Least Constraining Value ("Succeed-First")</h4>
                 </div>
@@ -2363,7 +2405,7 @@
             <!-- Algorithm 5 -->
             <div class="algo-card-v2" style="border-top: 4px solid #0891b2;">
               <div class="algo-card-header-v2">
-                <span style="font-size: 24px;">✨</span>
+                <span style="display:inline-flex;color:#22D3EE;"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"></path><path d="M6 6h10"></path><path d="M6 10h10"></path></svg></span>
                 <div>
                   <h4>5. Multi-Objective Soft Optimization</h4>
                 </div>
@@ -2392,7 +2434,7 @@
             <!-- Hard Constraints Card -->
             <div class="rule-card-v2 rule-card-hard">
               <div class="rule-header-v2">
-                <span style="font-size: 28px;">🔴</span>
+                <span style="display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="rgba(218,86,98,0.2)"></circle><line x1="12" y1="8" x2="12" y2="12"></line><line x1="12" y1="16" x2="12.01" y2="16"></line></svg></span>
                 <div>
                   <h4 style="color: #991b1b;">HARD CONSTRAINTS</h4>
                   <div style="font-size: 11.5px; color: #dc2626; font-weight: 700;">Strict Physical Laws • 100% Zero-Clash Guarantee</div>
@@ -2402,23 +2444,23 @@
                 These rules are non-negotiable. If even one hard constraint is broken, the timetable is physically impossible to execute in the real world.
               </p>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🚫</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg></span>
                 <div><strong>No Faculty Double-Booking:</strong> A professor cannot be in two classrooms at the exact same hour.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🚫</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg></span>
                 <div><strong>No Room Double-Booking:</strong> A physical room (e.g. F-102) can host only one class at a time.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🚫</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line></svg></span>
                 <div><strong>No Student Cohort Overlap:</strong> Students in AIML Tigers cannot have two simultaneous lectures.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">⏱️</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg></span>
                 <div><strong>Continuous 2-Hour Lab Blocks:</strong> Practical labs must occupy two consecutive periods without being split.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">📐</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#DA5662" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.3 8.7 8.7 21.3c-1 1-2.6 1-3.6 0l-1.4-1.4c-1-1-1-2.6 0-3.6L16.3 3.7c1-1 2.6-1 3.6 0l1.4 1.4c1 1 1 2.6 0 3.6Z"></path><path d="m14.5 5.5-2.5 2.5"></path><path d="m11.5 8.5-2.5 2.5"></path><path d="m8.5 11.5-2.5 2.5"></path></svg></span>
                 <div><strong>Room Capacity Compliance:</strong> A class of 70 students must never be placed in a 40-seat classroom.</div>
               </div>
             </div>
@@ -2426,7 +2468,7 @@
             <!-- Soft Constraints Card -->
             <div class="rule-card-v2 rule-card-soft">
               <div class="rule-header-v2">
-                <span style="font-size: 28px;">🟢</span>
+                <span style="display:inline-flex;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="rgba(52,211,153,0.2)"></circle><polyline points="9 12 11 14 15 10"></polyline></svg></span>
                 <div>
                   <h4 style="color: #166534;">SOFT CONSTRAINTS</h4>
                   <div style="font-size: 11.5px; color: #16a34a; font-weight: 700;">Human Comfort &amp; Academic Convenience</div>
@@ -2436,23 +2478,23 @@
                 These rules improve quality of life. The AI scores every possible solution and continuously tweaks the schedule to maximize comfort.
               </p>
               <div class="rule-item-row">
-                <span class="rule-item-icon">☕</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg></span>
                 <div><strong>Minimal Student Idle Gaps:</strong> Prevent painful 3-hour or 4-hour gaps between morning and afternoon classes.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">⚖️</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"></path><path d="M7 21h10"></path><path d="M12 3v18"></path><path d="M3 7h18"></path></svg></span>
                 <div><strong>Balanced Daily Load:</strong> Distribute teaching evenly across Monday–Friday (3 to 4 hours per day) rather than exhausting 7-hour marathons.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🔬</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 18h12"></path><path d="M10 2v7.31"></path><path d="M14 2v7.31"></path><path d="m8.5 2 7 0"></path><path d="M14 9.3 18.5 17H5.5L10 9.3"></path></svg></span>
                 <div><strong>Faculty Research Blocks:</strong> Protect dedicated research and PhD supervision hours (e.g., Friday 4:00 PM – 6:00 PM).</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🏛️</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="21" x2="21" y2="21"></line><line x1="4" y1="10" x2="20" y2="10"></line><polygon points="12 2 20 7 4 7 12 2"></polygon><line x1="6" y1="10" x2="6" y2="21"></line><line x1="10" y1="10" x2="10" y2="21"></line><line x1="14" y1="10" x2="14" y2="21"></line><line x1="18" y1="10" x2="18" y2="21"></line></svg></span>
                 <div><strong>Cohort Home Base:</strong> Keep student cohorts in their home block (C-Block or F-Block) to minimize walking between distant buildings.</div>
               </div>
               <div class="rule-item-row">
-                <span class="rule-item-icon">🌅</span>
+                <span class="rule-item-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v6"></path><path d="m4.93 10.93 4.24-4.24"></path><path d="m14.83 6.69 4.24 4.24"></path><path d="M2 18h20"></path><path d="M20 22H4"></path><path d="m16 18a4 4 0 0 0-8 0"></path></svg></span>
                 <div><strong>Fair Distribution:</strong> Rotate early 9:00 AM slots fairly among different subjects rather than always putting one subject early.</div>
               </div>
             </div>
@@ -2468,8 +2510,8 @@
               <thead>
                 <tr>
                   <th class="col-feature">Evaluation Factor</th>
-                  <th class="col-manual">❌ Manual Spreadsheets (Old Way)</th>
-                  <th class="col-ai">✅ Woxsen AI Engine (Our Prototype)</th>
+                  <th class="col-manual">Manual Spreadsheets (Traditional Way)</th>
+                  <th class="col-ai">Woxsen AI Engine (Our CSP Prototype)</th>
                 </tr>
               </thead>
               <tbody>

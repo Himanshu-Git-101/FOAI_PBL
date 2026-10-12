@@ -5,16 +5,16 @@
    ========================================================================== */
 
 body {
-  background-color: #f8fafc;
-  color: #1e293b;
-  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  background-color: transparent;
+  color: #CBD5E1;
+  font-family: 'Sansation', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   font-size: 11.5px;
   line-height: 1.4;
   margin: 18px 24px;
 }
 
 h1, h2, h3, h4, h5, h6 {
-  color: #0f172a;
+  color: #FFFFFF;
 }
 
 /* Institutional Metadata Summary */
@@ -52,7 +52,7 @@ body > table:nth-of-type(2) th {
 
 body > table:first-of-type td,
 body > table:nth-of-type(2) td {
-  color: #0f172a;
+  color: #FFFFFF;
   font-weight: 600;
 }
 
@@ -60,17 +60,18 @@ body > table:nth-of-type(2) td {
 .studio-toc-block,
 .fet-toc-block,
 p:has(strong:contains("Table of contents")) {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 10px;
+  background: rgba(12, 17, 24, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 12px;
   padding: 18px 22px;
   margin-bottom: 24px;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.03);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(16px);
 }
 
 p strong {
   font-size: 13px;
-  color: #0f172a;
+  color: #FFFFFF;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   display: block;
@@ -97,7 +98,7 @@ ul ul {
 }
 
 li a {
-  color: #1d4ed8;
+  color: #DA5662;
   text-decoration: none;
   font-weight: 600;
   transition: all 0.15s ease;
@@ -114,16 +115,18 @@ li a:hover {
 /* Original Modern Timetable Cards */
 table.odd_table,
 table.even_table {
-  border: 1px solid #cbd5e1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
   border-collapse: separate;
   border-spacing: 0;
   margin-top: 18px;
   margin-bottom: 14px;
   width: 100%;
-  background-color: #ffffff;
-  border-radius: 10px;
+  background-color: rgba(12, 17, 24, 0.72);
+  border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   transition: box-shadow 0.2s ease;
 }
 
@@ -136,17 +139,17 @@ caption {
   caption-side: top;
   text-align: center;
   padding: 12px 14px 10px 14px;
-  background-color: #f8fafc;
-  border: 1px solid #cbd5e1;
+  background-color: rgba(18, 25, 38, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-bottom: none;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 caption span.institution {
   font-size: 13.5px;
   font-weight: 700;
-  color: #1e40af;
+  color: #38BDF8;
   letter-spacing: 0.03em;
   text-transform: uppercase;
 }
@@ -154,21 +157,21 @@ caption span.institution {
 caption span.name {
   font-size: 16.5px;
   font-weight: 800;
-  color: #0f172a;
+  color: #FFFFFF;
   letter-spacing: -0.01em;
 }
 
 /* Header Columns */
 th.xAxis {
-  background-color: #f1f5f9;
-  color: #1e293b;
+  background-color: rgba(255, 255, 255, 0.06);
+  color: #F8FAFC;
   font-weight: 700;
   font-size: 11px;
   text-align: center;
   vertical-align: middle;
   padding: 10px 4px;
-  border-bottom: 2px solid #cbd5e1;
-  border-right: 1px solid #e2e8f0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
   white-space: nowrap;
 }
 
@@ -177,34 +180,34 @@ th.xAxis:last-child {
 }
 
 th.yAxis {
-  background-color: #f1f5f9;
-  color: #0f172a;
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
   font-weight: 800;
   font-size: 12px;
   text-align: center;
   vertical-align: middle;
   padding: 10px 8px;
-  border-bottom: 1px solid #e2e8f0;
-  border-right: 2px solid #cbd5e1;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
   width: 95px;
 }
 
 /* Timetable Cells */
 table td {
-  border-right: 1px solid #e2e8f0;
-  border-bottom: 1px solid #e2e8f0;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   padding: 8px 6px;
   text-align: center;
   vertical-align: middle;
   font-size: 11px;
   line-height: 1.42;
-  color: #1e293b;
-  background-color: #ffffff;
+  color: #CBD5E1;
+  background-color: rgba(12, 17, 24, 0.45);
   transition: background-color 0.2s ease;
 }
 
 table tr:hover td {
-  background-color: #f8fafc;
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 table td:last-child {
@@ -213,11 +216,12 @@ table td:last-child {
 
 /* Continuous 2-Hour Lab Block Spans */
 td[colspan="2"] {
-  background-color: #f0f7ff !important;
-  border-left: 2px solid #3b82f6 !important;
-  border-right: 2px solid #3b82f6 !important;
+  background-color: rgba(218, 86, 98, 0.14) !important;
+  border-left: 2px solid #DA5662 !important;
+  border-right: 2px solid #DA5662 !important;
   font-weight: 500;
   position: relative;
+  color: #FFFFFF !important;
 }
 
 td[colspan="2"]::before {
@@ -225,7 +229,7 @@ td[colspan="2"]::before {
   display: block;
   font-size: 9px;
   font-weight: 800;
-  color: #1d4ed8;
+  color: #DA5662;
   letter-spacing: 0.05em;
   margin-bottom: 3px;
   font-family: 'JetBrains Mono', monospace;
@@ -234,18 +238,18 @@ td[colspan="2"]::before {
 /* Empty & Lunch Break Slots */
 td:empty,
 td[data-slot="-x-"] {
-  background-color: #f8fafc;
+  background-color: transparent;
   color: #94a3b8;
 }
 
 /* Footnotes */
 tr.foot td {
-  background-color: #f8fafc;
-  color: #64748b;
+  background-color: rgba(255, 255, 255, 0.03);
+  color: #94A3B8;
   font-size: 10.5px;
   text-align: left;
   padding: 8px 14px;
-  border-top: 1px solid #e2e8f0;
+  border-top: 1px solid rgba(255, 255, 255, 0.10);
   border-bottom: none;
   border-right: none;
   font-family: 'JetBrains Mono', monospace;
@@ -382,21 +386,41 @@ td.detailed {
     font-size: 9.5px;
   }
   table.odd_table,
-  table.even_table {
-    page-break-after: always;
-    box-shadow: none;
-    border: 1px solid #475569;
-  }
+table.even_table {
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-collapse: separate;
+  border-spacing: 0;
+  margin-top: 18px;
+  margin-bottom: 14px;
+  width: 100%;
+  background-color: rgba(12, 17, 24, 0.72);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: box-shadow 0.2s ease;
+}
   th.xAxis, th.yAxis {
-    background-color: #f1f5f9 !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+  background-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+  font-weight: 800;
+  font-size: 12px;
+  text-align: center;
+  vertical-align: middle;
+  padding: 10px 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  width: 95px;
+}
   td[colspan="2"] {
-    background-color: #f0f7ff !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;
-  }
+  background-color: rgba(218, 86, 98, 0.14) !important;
+  border-left: 2px solid #DA5662 !important;
+  border-right: 2px solid #DA5662 !important;
+  font-weight: 500;
+  position: relative;
+  color: #FFFFFF !important;
+}
   p.back, .no-print {
     display: none !important;
   }
